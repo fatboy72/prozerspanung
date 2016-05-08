@@ -5,6 +5,7 @@
  * @package bootstrap-basic
  */
 ?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>  <html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
@@ -43,7 +44,7 @@
 								<div class="search-form"><?php get_search_form( ); ?></div>
 							</div>
 							<div class="col-md-6">
-								<a href="#" rel="home"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
+								<a href="#" rel="home"><img src="../../wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
 							</div>
 						</div><!-- .col-md-12 -->
 					</div><!--.site-branding-->
@@ -74,11 +75,11 @@
 				</div>
 				<div class="jumbotron">
 					
-					<img src="<?php bloginfo('url'); ?>/wp-content/uploads/2016/05/header.jpg" alt="logo" style="max-width:100%; height:auto;"></img>
+					<img src="../../wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="max-width:100%; height:auto;"></img>
 					
 					<div class="slogan">
 						<div class="container">
-							<div class="slogan-text"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2016/05/up-arrow.png" alt="logo" style="max-width:100%; height:auto;"></img>newsbraek: <a href="#">AMB-Stuttgard - Ein grosser Erfolg f&uuml;r proZerspanung.</a></div>
+							<div class="slogan-text"><img src="../../wp-content/uploads/2016/05/up-arrow.png" alt="up-arrow" style="max-width:100%; height:auto;"></img>newsbraek: <a href="#">AMB-Stuttgard - Ein grosser Erfolg f&uuml;r proZerspanung.</a></div>
 						</div>
 					</div>
 				</div>

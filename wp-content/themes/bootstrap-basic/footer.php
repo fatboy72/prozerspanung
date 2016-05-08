@@ -21,13 +21,10 @@
 						?> 
 					</div>
 					<div class="col-md-6 footer-right text-right">
-						<div id="footer-menu"><?php dynamic_sidebar('footer-right'); ?></div> 
+						<?php dynamic_sidebar('footer-right'); ?> 
 					</div>
 				</div>
 			</footer>
-		
-		
-		
 		</div><!--.container page-container-->
 		
 		
