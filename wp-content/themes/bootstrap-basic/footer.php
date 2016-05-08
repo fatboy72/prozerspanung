@@ -9,9 +9,10 @@
 			</div><!--.site-content-->
 			
 			
-			<footer id="site-footer" role="contentinfo">
-				<div id="footer-row" class="row site-footer">
-					<div class="col-md-6 footer-left">
+			<footer id="site-footer" role="contentinfo" >
+			<div class="container">
+				<div id="footer-row" class=" site-footer">
+					<div class="footer-left">
 						<?php 
 						if (!dynamic_sidebar('footer-left')) {
 							printf(__('Powered by %s', 'bootstrap-basic'), 'WordPress');
@@ -20,9 +21,10 @@
 						} 
 						?> 
 					</div>
-					<div class="col-md-6 footer-right text-right">
+					<div class="footer-right text-right">
 						<?php dynamic_sidebar('footer-right'); ?> 
 					</div>
+				</div>
 				</div>
 			</footer>
 		</div><!--.container page-container-->
