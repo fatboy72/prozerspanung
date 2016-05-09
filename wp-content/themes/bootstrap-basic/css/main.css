@@ -305,6 +305,15 @@ img.aligncenter {
 }
 /* /.background image frontpage */
 
+#background-middle {
+	display: block;
+	float: left;
+	width: 100%;
+	height: 900px;
+	overflow: visible;
+	top: 400px;
+}
+
 .jumbotron img {
 
 }
