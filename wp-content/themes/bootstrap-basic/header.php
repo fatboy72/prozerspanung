@@ -33,7 +33,7 @@
 			<?php do_action('before'); ?> 
 			<header role="banner">
 				<div class="container">
-					<div class="row row-with-vspace site-branding">
+					<div class="row row-with-vspace">
 						<div class="col-md-12">
 							<div class="col-md-6">
 								<div class="header-text">
@@ -47,14 +47,14 @@
 								<a href="#" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
 							
 						</div><!-- .col-md-12 -->
-					</div><!--.site-branding-->
+					</div><!--.row-->
 				</div>
 				
 				<div class="container-nav">
 					<div class="container">
 						<div class="row main-navigation">
 							<div class="col-md-12">
-								<nav class="navbar navbar-default" role="navigation">
+								<nav class="navbar navbar-inverse" role="navigation">
 									<div class="navbar-header">
 										<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-primary-collapse">
 											<span class="sr-only"><?php _e('Toggle navigation', 'bootstrap-basic'); ?></span>
@@ -69,11 +69,12 @@
 										<?php dynamic_sidebar('navbar-right'); ?> 
 									</div><!--.navbar-collapse-->
 								</nav>
-							</div>
+							</div><!--.col-md-12-->
 						</div><!--.main-navigation-->
 					</div>
 				</div>
-				<div class="jumbotron">
+				
+				<div class="jumbotron" style="padding-top: 0px;">
 					<img src="<?php site_url(); ?>wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="max-width:100%; height:auto;"></img>
 					<div class="slogan">
 						<div class="container">
@@ -84,4 +85,4 @@
 			</header>
 			
 			
-			<div id="content" class="row row-with-vspace site-content">
+			<div id="content" class="row site-content">

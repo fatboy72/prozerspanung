@@ -78,7 +78,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							setup_postdata( $post );
 							the_content( $more_link_text = null );
 							wp_reset_postdata(); ?>	</p>
-					<p><a class="btn btn-lg btn-success" href="#" role="button">Ansprechpartner</a></p><div style="margin-bottom: 80px;"></div>
+					<p><a class="btn btn-default" href="#" role="button">Ansprechpartner</a></p><div style="margin-bottom: 80px;"></div>
 					</div>
 			
 			<div  class="col-md-12 over-bg">	
@@ -87,7 +87,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							setup_postdata( $post ); ?>
 							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
 					<?php 	the_content( $more_link_text = null );
-							wp_reset_postdata(); ?><p><a class="btn btn-lg btn-success" href="#" role="button">Mehr erfahren</a></p>
+							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 				</div>
 				<div  class="col-md-4 over-bg" ></div>
 				<div  class="col-md-4" >
@@ -105,7 +105,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							setup_postdata( $post ); ?>
 							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
 					<?php 	the_content( $more_link_text = null );
-							wp_reset_postdata(); ?><p><a class="btn btn-lg btn-success" href="#" role="button">Mehr erfahren</a></p>
+							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 				</div>
 			</div>	
 
