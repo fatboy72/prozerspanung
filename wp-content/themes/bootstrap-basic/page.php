@@ -14,21 +14,19 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 ?> 
 <?php get_sidebar('left'); ?> 
 
-			<div class="jumbotron">
-				<div class="container">
+		<div class="jumbotron">	
+			<div class="container">
 				
-					<div class="col-md-6">
+			
+				<div class="col-md-6">
 
 					<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column" style="position:relative;z-index:100;">
-						<main id="main" class="site-main" role="main">
-							<?php 
-								if( $page_id > 2 ) {
-									while (have_posts()) {
-										the_post();
-										get_template_part( 'content', 'page' );
-										echo "\n\n";
-									} //endwhile;
-								}
+						
+							<?php
+
+switch( $page_id ) {
+							
+					case 2:
 							?>
 
 					<?php 	$post = get_post( 1 );
@@ -36,9 +34,10 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
 							<?php the_content( $more_link_text = null );
 								  wp_reset_postdata(); ?>
+							<p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 
 							
-						</main>
+						
 					</div>
 					
 				</div>
@@ -82,14 +81,13 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 					</div>
 			
 			<div  class="col-md-12 over-bg">	
-				<div  class="col-md-4 over-bg" >
+				<div  class="col-md-8 over-bg" >
 					<?php 	$post = get_post( 81 );
 							setup_postdata( $post ); ?>
 							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
 					<?php 	the_content( $more_link_text = null );
 							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 				</div>
-				<div  class="col-md-4 over-bg" ></div>
 				<div  class="col-md-4" >
 					<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kurbelwelle-kolben.png">
 				</div>
@@ -99,8 +97,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 				<div  class="col-md-4">
 					<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kugellager-unten.png">
 				</div>
-				<div  class="col-md-4 over-bg" ></div>
-				<div  class="col-md-4 text-right" >
+				<div  class="col-md-8 text-right" >
 					<?php 	$post = get_post( 88 );
 							setup_postdata( $post ); ?>
 							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
@@ -108,8 +105,18 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 				</div>
 			</div>	
-
-
+<?php 
+	break; 
+	
+	default:		
+						while (have_posts()) {
+							the_post();
+							get_template_part( 'content', 'page' );
+							echo "\n\n";
+						} //endwhile;
+					break;
+	
+} ?>
 				
 <?php get_sidebar('right'); ?> 
 <?php get_footer(); ?> 

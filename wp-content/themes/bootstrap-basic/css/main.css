@@ -219,12 +219,16 @@ img.aligncenter {
 }
 
 /* mp */
-.search-form {
-	max-width: 50%;
-}
+@media handheld, only screen and (max-width: 867px) {
 
-.header-text {
-	text-transform: uppercase;
+	.search-form {
+		display: none;
+	}
+}
+.search-form {
+		float: right;
+		padding-top: 4px;
+		padding-right: 5px;
 }
 
 /* footer menu and style */
@@ -268,7 +272,6 @@ img.aligncenter {
 }
 .slogan-text {
 	font-weight: 300;
-	text-transform: uppercase;
 	font-size: 1.5em;
 	color: white;
 	position: absolute;
@@ -312,13 +315,25 @@ img.aligncenter {
 	display: block;
 	float: left;
 	width: 100%;
-	height: 900px;
+	height: 200px;
 	overflow: visible;
 	top: 400px;
 }
 
-.container-nav {
+.container-nav { 
+	box-shadow: 0px 3px 5px #000;
 	background: #000;
 	position: relative;
-	
+	padding: 0px;	
+}
+.navbar {
+	background: none;
+}
+.navbar-collapse {
+	padding-left: 0px;
+}
+
+.btn-default {
+	border-color: #f01010;
+
 }

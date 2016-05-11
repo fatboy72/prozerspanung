@@ -32,23 +32,21 @@
 		<div class=" page-container">
 			<?php do_action('before'); ?> 
 			<header role="banner">
-				<div class="container">
+				<div class="container" style="padding-top: 20px;">
 					<div class="row row-with-vspace">
 						<div class="col-md-12">
-							<div class="col-md-6">
-								<div class="header-text">
+							<div class="col-md-6 header-text text-uppercase">
 									service hotline<br />
 									0800 - 701 702<br />
 									mo-fr 09.00 - 18.00 uhr
-								</div>
-								<div class="search-form"><?php get_search_form( ); ?></div>
 							</div>
-						
-								<a href="#" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
 							
+							<div class="col-md-6 header-text">							
+								<a href="#" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
+							</div>
 						</div><!-- .col-md-12 -->
 					</div><!--.row-->
-				</div>
+				</div><!--.container-->
 				
 				<div class="container-nav">
 					<div class="container">
@@ -63,7 +61,7 @@
 											<span class="icon-bar"></span>
 										</button>
 									</div>
-									
+									<span class="search-form"><?php get_search_form( ); ?></span>
 									<div class="collapse navbar-collapse navbar-primary-collapse">
 										<?php wp_nav_menu(array('theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'walker' => new BootstrapBasicMyWalkerNavMenu())); ?> 
 										<?php dynamic_sidebar('navbar-right'); ?> 
@@ -78,7 +76,7 @@
 					<img src="<?php site_url(); ?>wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="max-width:100%; height:auto;"></img>
 					<div class="slogan">
 						<div class="container">
-							<div class="slogan-text"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/up-arrow.png" alt="up-arrow" style="max-width:100%; height:auto;"></img>newsbraek: <a href="#">AMB-Stuttgard - Ein grosser Erfolg f&uuml;r proZerspanung.</a></div>
+							<div class="slogan-text text-uppercase"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/up-arrow.png" alt="up-arrow" style="max-width:100%; height:auto;"></img>newsbreak: <a href="#">AMB-Stuttgard - Ein grosser Erfolg f&uuml;r proZerspanung.</a></div>
 						</div>
 					</div>
 				</div>
