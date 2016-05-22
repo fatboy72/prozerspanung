@@ -5,7 +5,7 @@
 @import 'fix-bootstrap.css';
 
 body {
-	font-size: 16px;
+	 
 }
 
 img.aligncenter {
@@ -218,13 +218,6 @@ img.aligncenter {
 	padding: 10px;
 }
 
-/* mp */
-@media handheld, only screen and (max-width: 867px) {
-
-	.search-form {
-		display: none;
-	}
-}
 .search-form {
 		float: right;
 		padding-top: 4px;
@@ -267,29 +260,77 @@ img.aligncenter {
 	position: relative;
 	border: none;
 	background-color: #F01010;
-	width: 100%;
-	height: 80px;
+	padding:20px 0px;
+	height: 100px;
+	text-align:left;
+	-webkit-box-shadow: 0px 4px 7px 0px rgba(0,0,0,0.45);
+	-moz-box-shadow: 0px 4px 7px 0px rgba(0,0,0,0.45);
+	box-shadow: 0px 4px 7px 0px rgba(0,0,0,0.45);
 }
 .slogan-text {
-	font-weight: 300;
-	font-size: 1.5em;
+	font-weight: 400;
 	color: white;
-	position: absolute;
-	top: 20px;
-	left: 25%;
+	float: left;
 }
 .slogan-text a {
 	color: white;
 	text-decoration: none;
+	color: #FFF;
 }
 .slogan-text img {
-	padding: 0 10px;
+		margin-right:20px;
+}
+.slogan-text h4 {
+	text-transform:uppercase;
+	font-size:22px;
+	color: #FFF;
+	margin-top:0;
+	margin-bottom:0;
+}
+.slogan-text p {
+	color: #FFF;
+	font-size:16px;
+	line-height:1.2em;
 }
 
 .red-pipes {
 	color: #F01010;
 	padding-right: 10px;
 }
+.header-stage {
+	position:relative;
+}
+.header-stage-content {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+}
+.intro-container.jumbotron {
+		padding-left:0;
+		padding-top:20px;
+}
+.intro-container.jumbotron h3 {
+	font-size:18px;
+	font-weight:900;
+	padding: 10px 20px;
+	background-color: #F01010;
+	display:inline-block;
+	margin:0;
+}
+.intro-container.jumbotron p {
+	font-size:14px;
+	margin:0;
+}
+
+.intro-text {
+
+}
+.intro-text-inner {
+
+	font-weight: bold;
+}
+
 
 /* background image frontpage */
 #background-main {
@@ -308,6 +349,7 @@ img.aligncenter {
 #background-main img {
 	position: absolute;
 	top: -60%;
+	right: -360px;
 }
 /* /.background image frontpage */
 
@@ -333,7 +375,36 @@ img.aligncenter {
 	padding-left: 0px;
 }
 
-.btn-default {
-	border-color: #f01010;
-
+/* hover-dropdown parent navigation element */
+ul.nav li.dropdown:hover ul.dropdown-menu{
+	display: block;
+	margin-top:0px
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+.intro-container.jumbotron {
+
+		padding-top:60px;
+	}	
+	.intro-container.jumbotron h3 {
+		font-size:45px;
+		margin-bottom:20px;
+	}
+	.intro-container.jumbotron p {
+		font-size:inherit;
+		margin:0;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.search-form {
+		#display: none;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+

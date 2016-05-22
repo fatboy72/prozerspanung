@@ -42,7 +42,7 @@
 							</div>
 							
 							<div class="col-md-6 header-text">							
-								<a href="#" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
+								<a href="?page_id=2&lang=de" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
 							</div>
 						</div><!-- .col-md-12 -->
 					</div><!--.row-->
@@ -51,8 +51,9 @@
 				<div class="container-nav">
 					<div class="container">
 						<div class="row main-navigation">
-							<div class="col-md-12">
+							<div class="col-md-12">							
 								<nav class="navbar navbar-inverse" role="navigation">
+									<!--.navbar-burger-button-->
 									<div class="navbar-header">
 										<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-primary-collapse">
 											<span class="sr-only"><?php _e('Toggle navigation', 'bootstrap-basic'); ?></span>
@@ -60,7 +61,7 @@
 											<span class="icon-bar"></span>
 											<span class="icon-bar"></span>
 										</button>
-									</div>
+									</div>							
 									<span class="search-form"><?php get_search_form( ); ?></span>
 									<div class="collapse navbar-collapse navbar-primary-collapse">
 										<?php wp_nav_menu(array('theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'walker' => new BootstrapBasicMyWalkerNavMenu())); ?> 
@@ -71,15 +72,36 @@
 						</div><!--.main-navigation-->
 					</div>
 				</div>
-				
-				<div class="jumbotron" style="padding-top: 0px;">
-					<img src="<?php site_url(); ?>wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="max-width:100%; height:auto;"></img>
-					<div class="slogan">
+	
+				<div class="header-stage">	
+					<img src="wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="width:100%; height:auto;" />
+					<div class="header-stage-content">
 						<div class="container">
-							<div class="slogan-text text-uppercase"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/up-arrow.png" alt="up-arrow" style="max-width:100%; height:auto;"></img>newsbreak: <a href="#">AMB-Stuttgard - Ein grosser Erfolg f&uuml;r proZerspanung.</a></div>
+							<div class="intro-container text-uppercase jumbotron">
+								<div class="intro-text">
+									<h3 class="h1">Mit dem Anspruch auf Perfektion</h3>
+								</div>
+								<div class="intro-text-inner"><p>lorem ipsum massa sociosqu diam</p></div>
+							</div>
 						</div>
 					</div>
 				</div>
+				
+				<div class="slogan">
+					<div class="container">				
+						<div class="slogan-text">
+							<div class="pull-left">
+								<img src="wp-content/uploads/2016/05/up-arrow.png" alt="up-arrow"></img>
+							</div>
+							<div class="pull-left">
+								<h4>newsbreak:</h4>
+								<?php showsinglepost( 98 ); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				
 			</header>
 			
 			

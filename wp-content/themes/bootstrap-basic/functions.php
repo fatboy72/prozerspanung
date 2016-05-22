@@ -136,7 +136,6 @@ if (!function_exists('bootstrapBasicEnqueueScripts')) {
 		wp_enqueue_style('bootstrap-theme-style', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '3.3.6');
 		wp_enqueue_style('fontawesome-style', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.5.0');
 		wp_enqueue_style('main-style', get_template_directory_uri() . '/css/main.css');
-
 		wp_enqueue_script('modernizr-script', get_template_directory_uri() . '/js/vendor/modernizr.min.js', array(), '3.3.1');
 		wp_enqueue_script('respond-script', get_template_directory_uri() . '/js/vendor/respond.min.js', array(), '1.4.2');
 		wp_enqueue_script('html5-shiv-script', get_template_directory_uri() . '/js/vendor/html5shiv.min.js', array(), '3.7.3');
@@ -192,5 +191,17 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/widgets/BootstrapBasicSearchWidget.php';
 require get_template_directory() . '/inc/template-widgets-hook.php';
 
+/**
+ * --------------------------------------------------------------
+ * Marcus Misc
+ * --------------------------------------------------------------
+ */
 
-
+function showsinglepost( $id ) {	
+	
+	$post = get_post( $id );
+	setup_postdata( $post );
+	the_content( $more_link_text = null );
+	wp_reset_postdata();
+	
+}

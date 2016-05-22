@@ -14,35 +14,36 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 ?> 
 <?php get_sidebar('left'); ?> 
 
-		<div class="jumbotron">	
+		<div class="">	
 			<div class="container">
 				
-			
-				<div class="col-md-6">
+				<div class="row">
+				
+					<div class="col-md-6">
 
-					<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column" style="position:relative;z-index:100;">
+						
 						
 							<?php
 
-switch( $page_id ) {
+	switch( $page_id ) {
 							
 					case 2:
 							?>
 
 					<?php 	$post = get_post( 1 );
 							setup_postdata( $post ); ?>
-							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
+							<h1><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 							<?php the_content( $more_link_text = null );
 								  wp_reset_postdata(); ?>
 							<p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 
 							
 						
-					</div>
+						</div>
 					
-				</div>
+					</div>
 				
-				<div  class="col-md-12" id="background-main" alt="background-main">
+				<div class="col-md-12" id="background-main" alt="background-main">
 					    <img src="wp-content/uploads/2016/05/background-main.png">
 				</div>
 				
@@ -53,7 +54,7 @@ switch( $page_id ) {
 				<div  class="col-md-12 over-bg" >
 					<?php 	$post = get_post( 61 );
 							setup_postdata( $post ); ?>
-							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
+							<h2 class="h1"><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 					<?php 	the_content( $more_link_text = null );
 							wp_reset_postdata(); ?>
 				</div>
@@ -72,51 +73,55 @@ switch( $page_id ) {
 							wp_reset_postdata(); ?>Frank Sielemann<br />
 							<b>Verkaufsleitung</b></div></p>
 				</div>
-					<div class="col-lg-8">
+				
+				<div class="col-lg-8">
 					  <p><?php $post = get_post( 76 );
 							setup_postdata( $post );
 							the_content( $more_link_text = null );
 							wp_reset_postdata(); ?>	</p>
 					<p><a class="btn btn-default" href="#" role="button">Ansprechpartner</a></p><div style="margin-bottom: 80px;"></div>
+				</div>
+			
+				<div  class="col-md-12 over-bg">	
+					<div  class="col-md-8 over-bg" >
+						<?php 	$post = get_post( 81 );
+								setup_postdata( $post ); ?>
+								<h2 class="h1"><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+						<?php 	the_content( $more_link_text = null );
+								wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
 					</div>
-			
-			<div  class="col-md-12 over-bg">	
-				<div  class="col-md-8 over-bg" >
-					<?php 	$post = get_post( 81 );
-							setup_postdata( $post ); ?>
-							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
-					<?php 	the_content( $more_link_text = null );
-							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
+					<div  class="col-md-4" >
+						<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kurbelwelle-kolben.png">
+					</div>
 				</div>
-				<div  class="col-md-4" >
-					<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kurbelwelle-kolben.png">
-				</div>
-			</div>
-			
-			<div  class="col-md-12 over-bg">	
-				<div  class="col-md-4">
-					<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kugellager-unten.png">
-				</div>
-				<div  class="col-md-8 text-right" >
-					<?php 	$post = get_post( 88 );
-							setup_postdata( $post ); ?>
-							<h2><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2></a>
-					<?php 	the_content( $more_link_text = null );
-							wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
-				</div>
-			</div>	
+				
+				<div  class="col-md-12 over-bg">	
+					<div  class="col-md-4">
+						<img class="img-responsive" src="wp-content/uploads/2016/05/bg-kugellager-unten.png">
+					</div>
+					<div  class="col-md-8 text-right" >
+						<?php 	$post = get_post( 88 );
+								setup_postdata( $post ); ?>
+								<h2 class="h1"><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+						<?php 	the_content( $more_link_text = null );
+								wp_reset_postdata(); ?><p><a class="btn btn-default" href="#" role="button">Mehr erfahren</a></p>
+					</div>
+				</div>	
+	</div> <!-- /.row -->
 <?php 
 	break; 
-	
+?>
+
+
+
+<!-- include page-content if not frontpage!  -->
+<?php	
 	default:		
-						while (have_posts()) {
-							the_post();
-							get_template_part( 'content', 'page' );
-							echo "\n\n";
-						} //endwhile;
-					break;
-	
+			include( "sub-page.php" );
+	break;
+				
 } ?>
+<!-- /.include page-content if not frontpage!  -->
 				
 <?php get_sidebar('right'); ?> 
 <?php get_footer(); ?> 

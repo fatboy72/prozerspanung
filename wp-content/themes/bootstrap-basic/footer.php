@@ -6,7 +6,7 @@
  */
 ?>
 
-			</div><!--.site-content-->
+	</div><!--.site-content-->
 			
 			
 			<footer id="site-footer" role="contentinfo" >
@@ -28,8 +28,9 @@
 				</div>
 			</footer>
 		
-		</div><!--.container page-container-->
-		
+	</div><!--.container page-container-->
+	
+	
 		
 		<!--wordpress footer-->
 		<?php wp_footer(); ?> 
