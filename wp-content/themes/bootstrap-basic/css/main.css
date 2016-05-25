@@ -218,6 +218,11 @@ img.aligncenter {
 	padding: 10px;
 }
 
+
+
+/* ==========================================================================
+   Marcus' custom styles
+   ========================================================================== */
 .search-form {
 		float: right;
 		padding-top: 4px;
@@ -254,7 +259,6 @@ img.aligncenter {
 .footer-social-media a:hover img {
 
 }
-/* //.footer menu */
 
 .slogan {
 	position: relative;
@@ -307,8 +311,8 @@ img.aligncenter {
 	right:0;
 }
 .intro-container.jumbotron {
-		padding-left:0;
-		padding-top:20px;
+	padding-left:0;
+	padding-top:20px;
 }
 .intro-container.jumbotron h3 {
 	font-size:18px;
@@ -323,11 +327,7 @@ img.aligncenter {
 	margin:0;
 }
 
-.intro-text {
-
-}
 .intro-text-inner {
-
 	font-weight: bold;
 }
 
@@ -361,9 +361,20 @@ img.aligncenter {
 	overflow: visible;
 	top: 400px;
 }
+#background-middle-subpage img {
+	position: absolute;
+	overflow: visible;
+	top: 115%;
+	left: -50px;
+	z-index: -100;
+	width: 20%;
+}
 
 .container-nav { 
-	box-shadow: 0px 3px 5px #000;
+	z-index: 190;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.45);
+	-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.45);
+	box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.45);
 	background: #000;
 	position: relative;
 	padding: 0px;	
@@ -383,8 +394,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-.intro-container.jumbotron {
-
+	.intro-container.jumbotron {
 		padding-top:60px;
 	}	
 	.intro-container.jumbotron h3 {
@@ -395,6 +405,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 		font-size:inherit;
 		margin:0;
 	}
+	
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -406,5 +417,6 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+
 }
 

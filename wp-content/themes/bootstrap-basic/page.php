@@ -19,7 +19,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 				
 				<div class="row">
 				
-					<div class="col-md-6">
+					
 
 						
 						
@@ -29,7 +29,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 							
 					case 2:
 							?>
-
+						<div class="col-md-6">
 					<?php 	$post = get_post( 1 );
 							setup_postdata( $post ); ?>
 							<h1><span class="red-pipes">||</span><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
