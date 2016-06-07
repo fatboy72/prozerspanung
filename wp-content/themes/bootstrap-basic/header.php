@@ -42,7 +42,7 @@
 							</div>
 							
 							<div class="col-md-6 header-text">							
-								<a href="?page_id=2&lang=de" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"></img></a>
+								<a href="?page_id=2&lang=de" rel="home"><img src="<?php site_url(); ?>wp-content/uploads/2016/05/logo.jpg" alt="logo" style="max-width:100%; height:auto; float:right;"/></a>
 							</div>
 						</div><!-- .col-md-12 -->
 					</div><!--.row-->
@@ -72,21 +72,31 @@
 						</div><!--.main-navigation-->
 					</div>
 				</div>
-	
+
+                <?php
+                  $slogan_info = get_slogan_info ();
+
+                ?>
 				<div class="header-stage">	
 					<img src="wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="width:100%; height:auto;" />
 					<div class="header-stage-content">
 						<div class="container">
 							<div class="intro-container text-uppercase jumbotron">
 								<div class="intro-text">
-									<h3 class="h1">Mit dem Anspruch auf Perfektion</h3>
+									<h3 class="h1"><?php echo $slogan_info['sloganbig'] ; ?></h3>
 								</div>
-								<div class="intro-text-inner"><p>lorem ipsum massa sociosqu diam</p></div>
+                                <?php
+                                    if (isset ( $slogan_info ['slogansmall'] ) AND empty ($slogan_info ['slogansmall']) === FALSE) {
+                                ?>
+								    <div class="intro-text-inner"><p><?php echo $slogan_info ['slogansmall']; ?></p></div>
+                                <?php
+                                    }
+                                ?>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="slogan">
 					<div class="container">				
 						<div class="slogan-text">
@@ -105,4 +115,4 @@
 			</header>
 			
 			
-			<div id="content" class="row site-content">
+			<div id="content" class="site-content">
