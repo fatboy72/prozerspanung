@@ -10,14 +10,14 @@
 	</header><!-- .entry-header -->
 
 	
-	<?php if (is_search()) { // Only display Excerpts for Search ?> 
+	<?php if (is_search()) { // Only display Excerpts for Search ?>
 	<div class="entry-summary">
 		<?php the_excerpt(); ?> 
 		<div class="clearfix"></div>
 	</div><!-- .entry-summary -->
 	<?php } else { ?> 
 	<div class="entry-content">
-		<?php the_content(bootstrapBasicMoreLinkText()); ?> 
+		<?php the_content(bootstrapBasicMoreLinkText()); ?>
 		<div class="clearfix"></div>
 		<?php 
 		/**

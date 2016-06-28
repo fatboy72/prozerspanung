@@ -11,13 +11,19 @@ get_header();
  * determine main column size from actived sidebar
  */
 $main_column_size = bootstrapBasicGetMainColumnSize();
-?> 
-<?php get_sidebar('left'); ?> 
-				<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column">
-					<main id="main" class="site-main" role="main">
+
+    get_sidebar('left'); ?>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 backgrounded-middle-subpage">
+
+                    <main id="main" class="site-main" role="main">
 						<?php if (have_posts()) { ?> 
 						<header class="page-header">
-							<h1 class="page-title"><?php printf(__('Search Results for: %s', 'bootstrap-basic'), '<span>' . get_search_query() . '</span>'); ?></h1>
+							<h1 class="page-title"><?php printf(__('Suchergebnis für: %s', 'bootstrap-basic'), '<span>' . get_search_query() . '</span>'); ?></h1>
 						</header><!-- .page-header -->
 						<?php 
 						// start the loop
@@ -37,7 +43,9 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 						<?php get_template_part('no-results', 'search'); ?>
 						<?php } // endif; ?> 
 					</main>
-				</div>
+            </div>
+        </div>
+</div>
 		
 <?php get_sidebar('right'); ?> 
 <?php get_footer(); ?> 

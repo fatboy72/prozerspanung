@@ -9,10 +9,32 @@
 /**
  * Required WordPress variable.
  */
+
 if (!isset($content_width)) {
     $content_width = 1170;
 }
+if (!function_exists('bootstrapBasicFullPageSearchForm')) {
+    /**
+     * Display full page search form
+     *
+     * @return string the search form element
+     */
+    function bootstrapBasicFullPageSearchForm()
+    {
+        $output = '<form class="form-horizontal" method="get" action="' . esc_url(home_url('/')) . '" role="form">';
+        $output .= '<div class="form-group">';
+        $output .= '<div class="col-xs-8 col-md-10">';
+        $output .= '<input type="text" name="s" value="' . esc_attr(get_search_query()) . '" placeholder="' . esc_attr_x('Search &hellip;', 'placeholder', 'bootstrap-basic') . '" title="' . esc_attr_x('Search &hellip;', 'label', 'bootstrap-basic') . '" class="form-control" />';
+        $output .= '</div>';
+        $output .= '<div class="col-xs-4 col-md-2">';
+        $output .= '<button type="submit" class="btn btn-default">' . __('Search', 'bootstrap-basic') . '</button>';
+        $output .= '</div>';
+        $output .= '</div>';
+        $output .= '</form>';
 
+        return $output;
+    }// bootstrapBasicFullPageSearchForm
+}
 
 if (!function_exists('bootstrapBasicSetup')) {
     /**
@@ -132,8 +154,9 @@ if (!function_exists('bootstrapBasicEnqueueScripts')) {
      */
     function bootstrapBasicEnqueueScripts()
     {
+        wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|Roboto:400,700', array (), ''); 
         wp_enqueue_style('bootstrap-style', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '3.3.6');
-        wp_enqueue_style('bootstrap-theme-style', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '3.3.6');
+        //wp_enqueue_style('bootstrap-theme-style', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '3.3.6');
         wp_enqueue_style('fontawesome-style', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.5.0');
         wp_enqueue_style('main-style', get_template_directory_uri() . '/css/main.css');
         wp_enqueue_script('modernizr-script', get_template_directory_uri() . '/js/vendor/modernizr.min.js', array(), '3.3.1');
@@ -143,6 +166,8 @@ if (!function_exists('bootstrapBasicEnqueueScripts')) {
         wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/vendor/bootstrap.min.js', array(), '3.3.6', true);
         wp_enqueue_script('main-script', get_template_directory_uri() . '/js/main.js', array(), false, true);
         wp_enqueue_style('bootstrap-basic-style', get_stylesheet_uri());
+        
+        
     }// bootstrapBasicEnqueueScripts
 }
 add_action('wp_enqueue_scripts', 'bootstrapBasicEnqueueScripts');
@@ -196,13 +221,17 @@ require get_template_directory() . '/inc/template-widgets-hook.php';
  * Marcus Misc
  * --------------------------------------------------------------
  */
+pll_register_string('Text Knopf: mehr erfahren', 'Mehr erfahren');
+pll_register_string('Text Knopf: Ansprechpartner', 'Ansprechpartner');
+pll_register_string('Text Knopf: weiterlesen', 'read_more');
+
 
 function showsinglepost($id)
 {
-        $post = get_post( $id );
+        /*$post = get_post( $id );
         setup_postdata( $post );
         the_content( $more_link_text = null );
-        wp_reset_postdata();
+        wp_reset_postdata();*/
 
 }
 
@@ -239,4 +268,56 @@ function get_teaser_info()
         $teaser_info[ 'zitat_startseite' ] = get_field( 'zitat_startseite');
 
     return $teaser_info;
+}
+
+/**
+ * @return bool|string
+ */
+function show_time() {
+
+        $timestamp = time(); 
+        $datum = date("d.M Y",$timestamp);
+    
+    return $datum;
+}
+
+/**
+ * @return string
+ */
+function country_switch() {
+    return get_permalink(get_option('page_on_front'));
+}
+
+function show_teaser( $name = null ) {
+    
+    do_action( 'show_teaser', $name );
+
+    $templates = array();
+    $name = (string) $name;
+    if ( '' !== $name )
+            $templates[] = "teaser-{$name}.php";
+
+    $templates[] = 'teaser.php';
+
+    locate_template( $templates, true, false );
+    
+}
+
+/**
+ * @return bool|mixed
+ */
+function get_newsbreak() {
+
+    return get_field( 'newsbreak' , get_option( 'page_on_front' ) );
+}
+
+
+function get_the_excerpt_more_linked() {
+
+    global $post;
+
+    $excerpt = $post->post_excerpt;
+    $excerpt .= '<a class="more-link" href="' .get_permalink(). '">' .pll__('[Mehr erfahren]'). '</a>';
+    
+    return apply_filters( 'the_excerpt' , $excerpt );
 }

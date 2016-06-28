@@ -6,11 +6,10 @@ wp-content/backups/
 wp-content/blogs.dir/
 wp-content/cache/
 wp-content/upgrade/
-wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
 
-/.htaccess
+.htaccess
 /license.txt
 /readme.html
 /sitemap.xml
