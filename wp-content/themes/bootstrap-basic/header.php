@@ -36,9 +36,9 @@
 					<div class="row row-with-vspace">
                                             <div class="col-xs-4 col-md-6 header-text">
                                                             service hotline<br />
-                                                            0800 - 701 702<br />
-                                                            mo-fr 09.00 - 18.00 uhr<br />
-                                                            Datum:&nbsp;<?php echo show_time(); ?>
+                                                <?php pll_e( 'Telefonnummer' ); ?><br />
+                                                <?php pll_e( 'Oeffnungszeiten' ); ?><br />
+                                                <?php pll_e( 'Datumausgabe' ); echo '&nbsp;'.show_time(); ?>
                                             </div>
 
                                             <div class="col-xs-8 col-md-6 header-logo">
@@ -73,7 +73,6 @@
 
                 <?php
                   $slogan_info = get_slogan_info ();
-
                 ?>
                 <div class="header-stage">	
                     <img src="wp-content/uploads/2016/05/header.jpg" alt="header-stage" style="width:100%; height:auto;" />

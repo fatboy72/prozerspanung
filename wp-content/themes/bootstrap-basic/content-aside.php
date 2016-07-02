@@ -42,9 +42,9 @@
 								$categories_list = get_the_category_list(__(', ', 'bootstrap-basic'));
 								if (!empty($categories_list)) {
 							?>
-							<span class="cat-links">
-								<?php echo bootstrapBasicCategoriesList($categories_list); ?>
-							</span>
+<!--							<span class="cat-links">-->
+<!--								--><?php //echo bootstrapBasicCategoriesList($categories_list); ?>
+<!--							</span>-->
 							<?php } // End if categories ?>
 
 							<?php

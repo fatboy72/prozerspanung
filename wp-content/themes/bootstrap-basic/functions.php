@@ -223,7 +223,12 @@ require get_template_directory() . '/inc/template-widgets-hook.php';
  */
 pll_register_string('Text Knopf: mehr erfahren', 'Mehr erfahren');
 pll_register_string('Text Knopf: Ansprechpartner', 'Ansprechpartner');
-pll_register_string('Text Knopf: weiterlesen', 'read_more');
+pll_register_string('weiterlesen', 'weiterlesen');
+pll_register_string('Suchergebnis', 'Suchergebnis');
+pll_register_string('Suchformular', 'Suchformular');
+pll_register_string('Telefonnummer', 'Telefonnummer');
+pll_register_string('Oeffnungszeiten', 'Oeffnungszeiten');
+pll_register_string('Datumausgabe', 'Datumausgabe');
 
 
 function showsinglepost($id)
@@ -317,7 +322,17 @@ function get_the_excerpt_more_linked() {
     global $post;
 
     $excerpt = $post->post_excerpt;
-    $excerpt .= '<a class="more-link" href="' .get_permalink(). '">' .pll__('[Mehr erfahren]'). '</a>';
+    $excerpt .= '&nbsp;<a class="more-link" href="' .get_permalink(). '">' .'[' .pll__('weiterlesen'). ']' .'</a>';
     
     return apply_filters( 'the_excerpt' , $excerpt );
 }
+
+/**
+ * @param $link
+ * @return mixed
+ */
+function remove_more_link_scroll( $link ) {
+    $link = preg_replace( '|#more-[0-9]+|', '', $link );
+    return $link;
+}
+add_filter( 'the_content_more_link', 'remove_more_link_scroll' );

@@ -21,9 +21,9 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
         <div class="col-md-12 backgrounded-middle-subpage">
 
                     <main id="main" class="site-main" role="main">
-						<?php if (have_posts()) { ?> 
+						<?php if (have_posts()) { ?>
 						<header class="page-header">
-							<h1 class="page-title"><?php printf(__('Suchergebnis für: %s', 'bootstrap-basic'), '<span>' . get_search_query() . '</span>'); ?></h1>
+							<h2 class="page-title"><?php pll_e( 'Suchergebnis' ) .printf(__(': %s', 'bootstrap-basic'), '<span>' . get_search_query() . '</span>'); ?></h2>
 						</header><!-- .page-header -->
 						<?php 
 						// start the loop

@@ -492,7 +492,6 @@ img.aligncenter {
     color: #FFF;
     font-size:16px;
     line-height:1.2em;
-        
     font-size:13px;
 }
 
@@ -620,6 +619,38 @@ img.aligncenter {
     padding-top: 10px;
 }
 
+/* pagination */
+.pagination > li:first-child > span {
+    color: #000;
+    background-color: inherit;
+    border-color: #000;
+}
+.pagination > li:first-child > span:hover {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #000;
+}
+.pagination > li:first-child > span:active {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #000;
+}
+.pagination li a {
+    border-color: #000;
+    color: #000;
+    background-color: inherit;
+}
+.pagination li a:hover {
+    border-color: #000;
+    color: #fff;
+    background-color: #ff0000;
+}
+.pagination li a:active {
+    border-color: #000;
+    color: #fff;
+    background-color: #ff0000;
+}
+
 
 /* Chrome Hack 4 Small devices (tablets, 768px and up) */
 @media (min-width: 992px) and (-webkit-min-device-pixel-ratio:0) {
@@ -648,6 +679,28 @@ img.aligncenter {
     }
 	.search-form {
 
+    }
+}
+
+
+/* Small devices (handy, 360px and up)  */
+@media (max-width: 360px) {
+
+    .slogan-text h4 {
+        font-size: 12px;
+    }
+    .slogan-icon {
+        display: none;
+    }
+
+}
+@media (max-width: 991px) {
+
+    .slogan-icon {
+        width: 18px;
+    }
+    .slogan-text h4 {
+        font-size: 14px;
     }
 }
 
@@ -686,8 +739,9 @@ img.aligncenter {
     }
 
     .slogan-text p {
-        font-size:16px;
+        font-size:14px;
     }
+
     .header-text{
         font-size:13px;
     }
@@ -695,10 +749,12 @@ img.aligncenter {
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+
     #background-main img {
         position: absolute;
         top: -60%;
         right: -360px;
     }
+
 }
 
