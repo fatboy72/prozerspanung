@@ -3,7 +3,7 @@
  * Wpgmp_Google_Map_Lite class file.
  * @package Maps
  * @author Flipper Code <hello@flippercode.com>
- * @version 3.1.1
+ * @version 3.1.2
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin URI: http://www.flippercode.com/
 Description: Display Google Maps in Pages, Posts, Sidebar or Custom Templates. Unlimited maps, locations and categories supported. It’s Responsive, Multi-Lingual and Multi-Site Supported.
 Author: flippercode
 Author URI: http://www.flippercode.com/
-Version: 3.1.1
+Version: 3.1.2
 Text Domain: wp-google-map-plugin
 Domain Path: /lang/
 */
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 		function wpgmp_show_location_in_map($atts, $content = null) {
 			error_reporting( E_ERROR | E_PARSE );
 			try {
-				$factoryObject = new FactoryControllerWPGMP();
+				$factoryObject = new WPGMP_Controller();
 				$viewObject = $factoryObject->create_object( 'shortcode' );
 				$output = $viewObject->display( 'put-wpgmp',$atts );
 				return $output;
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 
 			try {
 
-				$factoryObject = new FactoryControllerWPGMP();
+				$factoryObject = new WPGMP_Controller();
 				$viewObject = $factoryObject->create_object( 'shortcode' );
 				$viewObject->display( 'put-wpgmp',$atts );
 
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 					$obj_type = $pageData[2].'_'.$pageData[3];
 				}
 
-				$factoryObject = new FactoryControllerWPGMP();
+				$factoryObject = new WPGMP_Controller();
 				$viewObject = $factoryObject->create_object( $obj_type );
 				$viewObject->display( $obj_operation );
 
@@ -533,9 +533,10 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 			}
 		}
 	}
+		$target = esc_js($_GET['target']);
 		?>
 		</ul>
-		<button type="button" class="button" style="margin-left:10px;" value="1" onclick="add_icon_to_images('<?php echo (wp_unslash( $_GET['target'] )); ?>');" name="send[<?php echo $picid ?>]"><?php _e( 'Insert into Post', WPGMP_TEXT_DOMAIN ) ?></button>
+		<button type="button" class="button" style="margin-left:10px;" value="1" onclick="add_icon_to_images('<?php echo  $target; ?>');" name="send[<?php echo $picid ?>]"><?php _e( 'Insert into Post', WPGMP_TEXT_DOMAIN ) ?></button>
 	</div>
 	</form>
 	<?php
@@ -586,7 +587,7 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 			}
 
 			if ( ! defined( 'WPGMP_VERSION' ) ) {
-				define( 'WPGMP_VERSION', '3.1.1' );
+				define( 'WPGMP_VERSION', '3.1.2' );
 			}
 
 			if ( ! defined( 'WPGMP_TEXT_DOMAIN' ) ) {
@@ -607,6 +608,10 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 
 			if ( ! defined( 'WPGMP_CORE_CLASSES' ) ) {
 				define( 'WPGMP_CORE_CLASSES', WPGMP_DIR.'core/' );
+			}
+			
+			if ( ! defined( 'WPGMP_PLUGIN_CLASSES' ) ) {
+				define( 'WPGMP_PLUGIN_CLASSES', WPGMP_DIR.'classes/' );
 			}
 
 			if ( ! defined( 'WPGMP_CONTROLLER' ) ) {
@@ -652,10 +657,10 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 			if ( ! defined( 'WPGMP_BACKUP' ) ) {
 
 				if ( ! is_dir( $upload_dir['basedir'].'/maps-backup' ) ) {
-					mkdir( $upload_dir['basedir'].'/maps-backup' );
+					//mkdir( $upload_dir['basedir'].'/maps-backup' );
 				}
-				define( 'WPGMP_BACKUP',$upload_dir['basedir'].'/maps-backup/' );
-				define( 'WPGMP_BACKUP_URL',$upload_dir['baseurl'].'/maps-backup/' );
+				//define( 'WPGMP_BACKUP',$upload_dir['basedir'].'/maps-backup/' );
+				//define( 'WPGMP_BACKUP_URL',$upload_dir['baseurl'].'/maps-backup/' );
 
 			}
 
@@ -685,21 +690,24 @@ if ( ! class_exists( 'Wpgmp_Google_Map_Lite' ) ) {
 		 */
 		private function _load_files() {
 
-			$files_to_include = array(
-			'class.map-widget.php',
-			'class.tabular.php',
-			'class.template.php',
-			'abstract.factory.php',
-			'class.controller-factory.php',
-			'class.model-factory.php',
-			'class.controller.php',
-			'class.model.php',
-			'class.validation.php',
-			'class.database.php',
-			);
-			foreach ( $files_to_include as $file ) {
-				require_once( WPGMP_CORE_CLASSES.$file );
+			$coreInitialisationFile = plugin_dir_path( __FILE__ ).'core/class.initiate-core.php';
+			if ( file_exists( $coreInitialisationFile ) ) {
+			   require_once( $coreInitialisationFile );
 			}
+			
+			//Load Plugin Files	
+			$plugin_files_to_include = array('wpgmp-controller.php',
+											 'wpgmp-model.php',
+											 'class.map-widget.php');
+											 
+											 
+			foreach ( $plugin_files_to_include as $file ) {
+
+				if(file_exists(WPGMP_PLUGIN_CLASSES . $file))
+				require_once( WPGMP_PLUGIN_CLASSES . $file ); 
+			}
+			
+			
 			// Load all modules.
 			$core_modules = array( 'overview','location','map','group_map','settings' );
 			if ( is_array( $core_modules ) ) {

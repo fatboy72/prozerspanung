@@ -13,7 +13,7 @@ if ( ! class_exists( 'WPGMP_Model_Overview' ) ) {
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
-	class WPGMP_Model_Overview extends WPGMP_Model_Base {
+	class WPGMP_Model_Overview extends FlipperCode_Model_Base {
 		/**
 		 * Intialize Backup object.
 		 */
@@ -23,6 +23,9 @@ if ( ! class_exists( 'WPGMP_Model_Overview' ) ) {
 		 * Admin menu for Settings Operation
 		 */
 		function navigation() {
+			return array(
+			'wpgmp_how_overview' => __( 'How to Use', WPGMP_TEXT_DOMAIN ),
+			);
 		}
 	}
 }

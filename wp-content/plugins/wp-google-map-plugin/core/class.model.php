@@ -3,18 +3,18 @@
  * Model base class
  * @author Flipper Code <hello@flippercode.com>
  * @version 3.0.0
- * @package Maps
+ * @package Core
  */
 
-if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
+if ( ! class_exists( 'FlipperCode_Model_Base' ) ) {
 
 	/**
 	 * Model base class
 	 * @author Flipper Code <hello@flippercode.com>
 	 * @version 3.0.0
-	 * @package Maps
+	 * @package Core
 	 */
-	class WPGMP_Model_Base {
+	class FlipperCode_Model_Base {
 		/**
 		 * Errors container.
 		 * @var array
@@ -72,7 +72,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 
 			if ( property_exists( $this, $property ) ) {
 
-				$validator = new WPGMP_Validator();
+				$validator = new FlipperCode_Validator();
 
 				if ( isset( $this->validations[ $property ] ) ) {
 
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 			if ( isset( $this->validations ) ) {
 
 				foreach ( $this->validations as $field => $checkup ) {
-					$validator = new WPGMP_Validator();
+					$validator = new FlipperCode_Validator();
 					foreach ( $checkup as $property => $message ) {
 						$validator->add( $field,$data[ $field ],$property,$message );
 					}
@@ -134,7 +134,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 		 */
 		function get($table = '', $fcv_array = array(), $sortBy = '', $ascending = true, $limit = '') {
 
-			$connection = WPGMP_Database::connect();
+			$connection = FlipperCode_Database::connect();
 
 			$sqlLimit = ('' != $limit ? "LIMIT $limit" : '');
 			$this->query = "SELECT * FROM $this->table ";
@@ -192,7 +192,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 			$this->query .= ' ORDER BY '.$sortBy.' '.($ascending ? 'ASC' : 'DESC')." $sqlLimit";
 
 			$thisObjectName = get_class( $this );
-			$cursors = WPGMP_Database::reader( $this->query, $connection );
+			$cursors = FlipperCode_Database::reader( $this->query, $connection );
 
 			return $cursors;
 		}
@@ -204,9 +204,9 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 		function query($query) {
 
 			$this->query = $query;
-			$connection = WPGMP_Database::connect();
+			$connection = FlipperCode_Database::connect();
 			$thisObjectName = get_class( $this );
-			$cursors = WPGMP_Database::reader( $this->query, $connection );
+			$cursors = FlipperCode_Database::reader( $this->query, $connection );
 
 			if ( ! empty( $cursors ) ) {
 
@@ -225,7 +225,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 		 * @param  string $file_name File Name.
 		 * @return boolean      True or False.
 		 */
-		public function wpgmp_validate_extension($file_name) {
+		public function wpp_validate_extension($file_name) {
 
 			$ext_array = array( '.csv', '.xml', '.json', '.xls' );
 			$extension = strtolower( strrchr( $file_name,'.' ) );
@@ -303,7 +303,7 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 		 * @param  string $xml XML nodes.
 		 * @return array      Array nodes.
 		 */
-		public function wpgmp_xml_2array($xml) {
+		public function wpp_xml_2array($xml) {
 
 			$arr = array();
 
@@ -312,11 +312,52 @@ if ( ! class_exists( 'WPGMP_Model_Base' ) ) {
 				if ( count( $r->children() ) == 0 ) {
 					$arr[ $r->getName() ] = strval( $r );
 				} else {
-					$arr[ $r->getName() ][] = $this->wpgmp_xml_2array( $r );
+					$arr[ $r->getName() ][] = $this->wpp_xml_2array( $r );
 				}
 			}
 
 			return $arr;
+		}
+
+		/**
+		 * Validate file extension.
+		 * @param  string $file_name File Name.
+		 * @return boolean      True or False.
+		 */
+		public function validate_extension($file_name) {
+
+			$ext_array = array( '.csv' );
+			$extension = strtolower( strrchr( $file_name,'.' ) );
+			$ext_count = count( $ext_array );
+
+			if ( ! $file_name ) {
+				return false;
+			} else {
+				if ( ! $ext_array ) {
+					return true;
+				} else {
+					foreach ( $ext_array as $value ) {
+						$first_char = substr( $value,0,1 );
+						if ( '.' <> $first_char ) {
+							$extensions[] = '.'.strtolower( $value );
+						} else {
+							$extensions[] = strtolower( $value );
+						}
+					}
+
+					foreach ( $extensions as $value ) {
+						if ( $value == $extension ) {
+							$valid_extension = 'TRUE';
+						}
+					}
+
+					if ( $valid_extension ) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
 		}
 
 	}

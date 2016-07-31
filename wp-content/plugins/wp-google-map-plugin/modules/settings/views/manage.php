@@ -6,13 +6,15 @@
  * @package Maps
  */
 
-$form  = new Responsive_Markup();
+$form  = new FlipperCode_HTML_Markup();
 $form->set_header( __( 'General Setting(s)', WPGMP_TEXT_DOMAIN ), $response );
+
 $form->add_element('text','wpgmp_api_key',array(
-	'lable' => __( 'Business API Key',WPGMP_TEXT_DOMAIN ),
+	'lable' => __( 'Google Maps API Key',WPGMP_TEXT_DOMAIN ),
 	'value' => get_option( 'wpgmp_api_key' ),
-	'desc' => __( 'Insert Api Key if you signup for google maps business api.', WPGMP_TEXT_DOMAIN ),
+	'desc' => __( 'Get here <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key"> Api Key </a> and insert here.', WPGMP_TEXT_DOMAIN ),
 	));
+
 $language = array(
 'en' => __( 'ENGLISH', WPGMP_TEXT_DOMAIN ),
 'ar' => __( 'ARABIC', WPGMP_TEXT_DOMAIN ),

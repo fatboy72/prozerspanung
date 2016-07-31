@@ -66,7 +66,7 @@ if (!function_exists('bootstrapBasicSetup')) {
         ));
 
         // add post formats support
-        add_theme_support('post-formats', array('aside', 'image', 'video', 'quote', 'link'));
+        add_theme_support('post-formats', array('aside'));
 
         // add support custom background
         add_theme_support(
@@ -336,3 +336,17 @@ function remove_more_link_scroll( $link ) {
     return $link;
 }
 add_filter( 'the_content_more_link', 'remove_more_link_scroll' );
+
+
+
+/* Navigationspunkte aus dem WordPress-Dashboard entfernen */
+function remove_menus () {
+    global $menu;
+    $restricted = array( __('Kommentare'), __('Werkzeuge'), __('Profil'), __('Design'), __('Formulare') );
+    end ($menu);
+    while (prev($menu)){
+        $value = explode(' ',$menu[key($menu)][0]);
+        if(in_array($value[0] != NULL?$value[0]:"" , $restricted)){unset($menu[key($menu)]);}
+    }
+}
+add_action('admin_menu', 'remove_menus');

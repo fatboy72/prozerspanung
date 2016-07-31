@@ -13,7 +13,7 @@ if ( ! class_exists( 'WPGMP_Model_Settings' ) ) {
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
-	class WPGMP_Model_Settings extends WPGMP_Model_Base {
+	class WPGMP_Model_Settings extends FlipperCode_Model_Base {
 		/**
 		 * Intialize Backup object.
 		 */
@@ -32,7 +32,7 @@ if ( ! class_exists( 'WPGMP_Model_Settings' ) ) {
 		 * Add or Edit Operation.
 		 */
 		function save() {
-
+			global $_POST;
 			if ( isset( $_REQUEST['_wpnonce'] ) ) {
 				$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ); }
 

@@ -28,7 +28,7 @@ if ( class_exists( 'WP_List_Table_Helper' ) and ! class_exists( 'Wpgmp_Maps_Tabl
 		 */
 		public function copy() {
 			$map_id = intval( $_GET['map_id'] );
-			$modelFactory = new FactoryModelWPGMP();
+			$modelFactory = new WPGMP_Model();
 			$map_obj = $modelFactory->create_object( 'map' );
 			$map = $map_obj->copy( $map_id );
 			$this->prepare_items();

@@ -188,8 +188,7 @@ h4, .h4, h4 a, .h4 a {
 #main-navigation .search-form {
     float: left;
     margin-bottom:10px;
-
-    padding-top: 3px;
+    padding-top: 2px;
 }
 /*************** NAVBAR ***************/
 
@@ -205,11 +204,6 @@ h4, .h4, h4 a, .h4 a {
     display:block;
     float:left;
 }
-.normal-content {
-    
-  
-}
-
 .page-container {
     overflow-x:hidden;/** Prevent horizontal scrolling **/
 }
@@ -561,7 +555,7 @@ img.aligncenter {
 	top: -60%;
 	right: -360px;
 }
-/* /.background image frontpage */
+/* /.background image frontpage and more */
 
 #background-middle {
 	display: block;
@@ -602,6 +596,36 @@ img.aligncenter {
     left: -300px;
     z-index: -100;
 }
+#background-side-subpage-left {
+    position: absolute;
+    overflow: visible;
+    top: 20%;
+    left: -380px;
+    z-index: -100;
+}
+#background-side-subpage-right {
+    position: absolute;
+    overflow: visible;
+    top: 51%;
+    right: -380px;
+    transform: rotate( 180deg );
+}
+#background-middle-subpage-right-small {
+    position: absolute;
+    overflow: visible;
+    top: 50%;
+    right: -150px;
+}
+#background-middle-subpage-right-small img {
+    max-width: 80%;
+}
+#background-middle-subpage-right-turned img {
+    position: absolute;
+    overflow: visible;
+    top: 51%;
+    right: -380px;
+    transform: rotate( 180deg );
+}
 #background-middle-subpage-left img {
     width: 300px;
 }
@@ -612,6 +636,19 @@ img.aligncenter {
     right: 100px;
     z-index: -100;
     width: 20%;
+}
+
+.csc-textpic-image {
+    background: #f2f2f1 none repeat scroll 0 0;
+    border: 1px solid #c7c7c7;
+    display: block;
+    float: left;
+    height: auto;
+    width: auto;
+    margin: 0 7px 7px 0;
+    overflow: hidden;
+    text-align: center;
+
 }
 
 .jobstyle {
@@ -746,7 +783,7 @@ ul.download-list li a {
     .slogan-icon {
         display: none;
     }
-    .slogan-text {
+    .slogan-text, .intro-text-inner {
         display: none;
     }
     .slogan {
@@ -774,10 +811,6 @@ ul.download-list li a {
     ul.download-list li a {
         font-size: 12px;
     }
-    .sprachumschaltung {
-        position: fixed;
-    }
-
 }
 
 @media (max-width: 410px) {
@@ -799,7 +832,7 @@ ul.download-list li a {
         width:100%;
         float:left;
     }
-    #background-middle-subpage-right img, #background-middle-subpage-nine img {
+    #background-middle-subpage-right img, #background-middle-subpage-nine img, #background-side-subpage-left, #background-side-subpage-right, #background-middle-subpage-right-turned img {
         display: none;
     }
 }
@@ -822,10 +855,6 @@ ul.download-list li a {
         top: -60%;
         right: -360px;
     }
-    .search-form {
-
-    }
-
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -876,7 +905,12 @@ ul.download-list li a {
         float: right;
         margin-bottom:0;
     }
+}
 
+@media (max-width: 1150px) {
+    #background-middle-subpage-right-small img {
+        display: none;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */

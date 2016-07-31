@@ -21,7 +21,7 @@ if ( ! class_exists( 'WPGMP_Google_Map_Widget_Class' ) ) {
 
 			parent::__construct(
 				'WPGMP_Google_Map_Widget_Class',
-				'WP Google Map Plugin',
+				'WP Google Map Pro',
 				array( 'description' => __( 'A widget to display google maps' , WPGMP_TEXT_DOMAIN ) )
 			);
 		}
@@ -37,7 +37,8 @@ if ( ! class_exists( 'WPGMP_Google_Map_Widget_Class' ) ) {
 
 			$map_id = apply_filters( 'widget_title', empty( $instance['map_id'] ) ? '' : $instance['map_id'], $instance, $this->id_base );
 	   		$map_title = apply_filters( 'widget_text', empty( $instance['map_title'] ) ? '' : $instance['map_title'], $instance );
-	   		echo $before_widget;
+
+    		echo $before_widget;
 	      	if ( ! empty( $map_title ) ) {
 				echo $before_title.$map_title.$after_title; }
 

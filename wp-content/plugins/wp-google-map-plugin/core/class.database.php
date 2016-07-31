@@ -1,18 +1,18 @@
 <?php
 /**
- * WPGMP_Database class file.
+ * FlipperCode_Database class file.
  * @author Flipper Code <hello@flippercode.com>
  * @package Core
  */
 
-if ( ! class_exists( 'WPGMP_Database' ) ) {
+if ( ! class_exists( 'FlipperCode_Database' ) ) {
 
 	/**
-	 * Class : WPGMP_Database
+	 * Class : FlipperCode_Database
 	 * @author Flipper Code <hello@flippercode.com>
-	 * @package Maps
+	 * @package Core
 	 */
-	class WPGMP_Database {
+	class FlipperCode_Database {
 		/**
 		 * Connection reference.
 		 * @var [type]

@@ -5,18 +5,18 @@
  * @author Flipper Code <hello@flippercode.com>
  */
 
-if ( ! class_exists( 'WPGMP_Validator' ) ) {
+if ( ! class_exists( 'FlipperCode_Validator' ) ) {
 
 	/**
-	 * WPGMP_Validator Class
+	 * FlipperCode_Validator Class
 	 * @author Flipper Code <hello@flippercode.com>
 	 * @package Core
 	 */
-	class WPGMP_Validator {
+	class FlipperCode_Validator {
 		/**
-		 * WPGMP_Validator Constructer.
+		 * FlipperCode_Validator Constructer.
 		 */
-		function WPGMP_Validator() {
+		function FlipperCode_Validator() {
 
 			$this->id = 0;
 		}

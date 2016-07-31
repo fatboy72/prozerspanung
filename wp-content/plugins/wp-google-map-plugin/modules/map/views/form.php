@@ -18,7 +18,7 @@ if ( isset( $_REQUEST['_wpnonce'] ) ) {
 	}
 }
 global $wpdb;
-$modelFactory = new FactoryModelWPGMP();
+$modelFactory = new WPGMP_Model();
 $map_obj = $modelFactory->create_object( 'map' );
 if ( isset( $_GET['doaction'] ) and 'edit' == $_GET['doaction'] and isset( $_GET['map_id'] ) ) {
 	$map_obj = $map_obj->fetch( array( array( 'map_id', '=', intval( wp_unslash( $_GET['map_id'] ) ) ) ) );
@@ -28,8 +28,20 @@ if ( isset( $_GET['doaction'] ) and 'edit' == $_GET['doaction'] and isset( $_GET
 	unset( $data );
 }
 
-$form  = new Responsive_Markup();
+$form  = new FlipperCode_HTML_Markup();
 $form->set_header( __( 'Map Information', WPGMP_TEXT_DOMAIN ), $response, __( 'Manage Maps', WPGMP_TEXT_DOMAIN ), 'wpgmp_manage_map' );
+
+if( get_option( 'wpgmp_api_key' ) == '' ) {
+
+$form->add_element( 'message', 'wpgmp_key_required', array(
+	'value' => __( 'Google Maps API Key is missing. Follow instructions to <a target="_blank" href="http://bit.ly/292gCV2">create google maps api key </a> and then insert your key <a target="_blank" href="'.admin_url( 'admin.php?page=wpgmp_manage_settings' ).'">here</a>.',WPGMP_TEXT_DOMAIN ),
+	'class' => 'alert alert-danger',
+	'before' => '<div class="col-md-12 wpgmp_key_required">',
+	'after' => '</div>',
+));
+
+}
+
 include( 'map-forms/general-setting-form.php' );
 include( 'map-forms/map-center-settings.php' );
 include( 'map-forms/locations-form.php' );

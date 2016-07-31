@@ -5,7 +5,7 @@
  * @package Core
  */
 
-if ( ! class_exists( 'FactoryControllerWPGMP' ) ) {
+if ( ! class_exists( 'Flippercode_Factory_Controller' ) ) {
 
 	/**
 	 * Controller Factory Class
@@ -13,26 +13,35 @@ if ( ! class_exists( 'FactoryControllerWPGMP' ) ) {
 	 * @version 3.0.0
 	 * @package Core
 	 */
-	class FactoryControllerWPGMP extends AbstractFactgoryWPGMP {
+	class Flippercode_Factory_Controller extends AbstractFactoryFlipperCode {
 		/**
 		 * FactoryController constructer.
 		 */
-		public function __construct() {
+
+		private $mainControllerClass;
+
+		public function __construct($module_path, $module_prefix = '') {
+			
+		    $this->modulePrefix = $module_prefix;
+		    $this->modulePath = $module_path;
+		    $this->mainControllerClass = plugin_dir_path( __FILE__ ).'class.controller.php';
 		}
+
 		/**
 		 * Create controller object by passing object type.
 		 * @param  string $objectType Object Type.
 		 * @return object         Return class object.
 		 */
 		public function create_object($objectType) {
-
+			
 			switch ( $objectType ) {
 
-				default : if ( file_exists( WPGMP_CORE_CONTROLLER_CLASS ) ) {
-						  require_once( WPGMP_CORE_CONTROLLER_CLASS ); }
-				if ( class_exists( 'WPGMP_Core_Controller' ) ) {
-					return new WPGMP_Core_Controller( $objectType ); }
-						  break;
+			default : 
+			if ( file_exists( $this->mainControllerClass ) ) {
+				require_once( $this->mainControllerClass );
+				return $coreControllerObj = new Flippercode_Core_Controller( $objectType,$this->modulePath,$this->modulePrefix);
+			}
+			break;
 
 			}
 

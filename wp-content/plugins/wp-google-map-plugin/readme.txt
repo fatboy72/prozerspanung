@@ -7,7 +7,7 @@ Author URI:        http://profiles.wordpress.org/flippercode/
 Author:            flippercode
 Donate link:       (a link for donating)
 Requires at least: 2.0.0 
-Tested up to:      4.5
+Tested up to:      4.5.3
 Stable tag:        Display Google Maps in Pages, Posts, Sidebar or Custom Templates. It’s Responsive, Multi-Lingual and Multi-Site Supported. 
 
 == Description ==
@@ -31,13 +31,13 @@ Here is a quick highlight on the numerous customizable features offered by the f
 * Display Road Map view. This is the default map type
 * Display Google Earth satellite images on just one click
 * Display maps in a blend of normal and satellite views
-* Display physical maps based on terrain information
+* Display physical maps based on terrain information.
+* Assign your own markers to categories or choose from +500 readymade markers provided by the [Maps Icons Collection](https://mapicons.mapsmarker.com).
 * Display traffic real time conditions and overlays using Traffic Layers
 * Add bicycle path information to your maps using the Bicycling Layer
 * Display physical maps based on terrain information
 * A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
 * Enable visual refresh on any Google Map at a button’s click
-* No need of any Google API key. Based on API Version 3.
 * Fully Responsive. Tested on real devices.
 * Display one infowindow at a time.
 * Multi-lingual Supported.
@@ -71,7 +71,6 @@ Here is a quick highlight on the numerous customizable features offered by the f
 * Display physical maps based on terrain information.
 * A Cross Browser Compatible plugin. Fully tested on IE8, IE9, IE10 and all major browsers
 * Enable visual refresh on any Google Map at a button’s click.
-* No need of any Google API key. Based on API Version 3.
 * Fully Responsive. Tested on real devices.
 * Display one infowindow at a time.
 * Multi-lingual Supported.
@@ -174,6 +173,11 @@ This section describes how to install the plugin and get it working.
 
 
 == Changelog ==
+
+Version 3.1.2
+* Fix - XSS Vulnerability is resolved.
+* Improvement - UI is updated.
+
 
 Version 3.1.1
 * Fix - Access level to WP_List_Table_Helper::pagination() must be public.

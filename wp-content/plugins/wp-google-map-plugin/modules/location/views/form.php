@@ -20,7 +20,7 @@ if ( isset( $_REQUEST['_wpnonce'] ) ) {
 global $wpdb;
 
 
-$modelFactory = new FactoryModelWPGMP();
+$modelFactory = new WPGMP_Model();
 $category_obj = $modelFactory->create_object( 'group_map' );
 $categories = $category_obj->fetch();
 if ( is_array( $categories ) and ! empty( $categories ) ) {
@@ -37,7 +37,7 @@ if ( isset( $_GET['doaction'] ) and 'edit' == $_GET['doaction'] and isset( $_GET
 	// Reset $_POST object for antoher entry.
 	unset( $data );
 }
-$form  = new Responsive_Markup();
+$form  = new FlipperCode_HTML_Markup();
 $form->set_header( __( 'Location Information', WPGMP_TEXT_DOMAIN ), $response, __( 'Manage Locations', WPGMP_TEXT_DOMAIN ), 'wpgmp_manage_location' );
 $form->add_element( 'text', 'location_title', array(
 	'lable' => __( 'Location Title', 'wpgmp_google_map' ),

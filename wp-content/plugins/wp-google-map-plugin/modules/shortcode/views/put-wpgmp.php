@@ -10,7 +10,7 @@ if ( isset( $options['id'] ) ) {
 } else { return ''; }
 
 // Fetch map information.
-$modelFactory = new FactoryModelWPGMP();
+$modelFactory = new WPGMP_Model();
 $map_obj = $modelFactory->create_object( 'map' );
 $map_record = $map_obj->fetch( array( array( 'map_id', '=', $map_id ) ) );
 $map = $map_record[0];

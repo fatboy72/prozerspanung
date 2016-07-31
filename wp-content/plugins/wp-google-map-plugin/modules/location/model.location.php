@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPGMP_Model_Location' ) ) {
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
-	class WPGMP_Model_Location extends WPGMP_Model_Base
+	class WPGMP_Model_Location extends FlipperCode_Model_Base
 	{
 		/**
 		 * Validations on location properies.
@@ -109,7 +109,7 @@ PRIMARY KEY  (location_id)
 		 * Add or Edit Operation.
 		 */
 		public function save() {
-			
+			global $_POST;
 			$entityID = '';
 			if ( isset( $_REQUEST['_wpnonce'] ) ) {
 				$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ); }
@@ -164,7 +164,7 @@ PRIMARY KEY  (location_id)
 				$where = '';
 			}
 
-			$result = WPGMP_Database::insert_or_update( $this->table, $data, $where );
+			$result = FlipperCode_Database::insert_or_update( $this->table, $data, $where );
 
 			if ( false === $result ) {
 				$response['error'] = __( 'Something went wrong. Please try again.',WPGMP_TEXT_DOMAIN );
@@ -182,9 +182,9 @@ PRIMARY KEY  (location_id)
 		public function delete() {
 			if ( isset( $_GET['location_id'] ) ) {
 				$id = intval( wp_unslash( $_GET['location_id'] ) );
-				$connection = WPGMP_Database::connect();
+				$connection = FlipperCode_Database::connect();
 				$this->query = $connection->prepare( "DELETE FROM $this->table WHERE $this->unique='%d'", $id );
-				return WPGMP_Database::non_query( $this->query, $connection );
+				return FlipperCode_Database::non_query( $this->query, $connection );
 			}
 		}
 		/**
@@ -194,7 +194,7 @@ PRIMARY KEY  (location_id)
 		function export($type = 'csv') {
 			$all_locations = $this->fetch();
 			$file_name = sanitize_file_name( 'location_'.$type.'_'.time() );
-			$modelFactory = new FactoryModelWPGMP();
+			$modelFactory = new WPGMP_Model();
 			$category = $modelFactory->create_object( 'group_map' );
 			$categories = $category->fetch();
 			if ( ! empty( $categories ) ) {
@@ -270,7 +270,7 @@ PRIMARY KEY  (location_id)
 					$file_data = $importer->import( $file_extension[1],'import_file' );
 					$datas = array();
 					if ( ! empty( $file_data ) ) {
-						$modelFactory = new FactoryModelWPGMP();
+						$modelFactory = new WPGMP_Model();
 						$category = $modelFactory->create_object( 'group_map' );
 						$categories = $category->fetch();
 						if ( ! empty( $categories ) ) {
@@ -343,7 +343,7 @@ PRIMARY KEY  (location_id)
 										$cat_id = array_search( sanitize_text_field( $cat ), (array) $categories_data );
 										if ( false == $cat_id ) {
 											// Create a new category.
-											$new_cat_id = WPGMP_Database::insert_or_update( TBL_GROUPMAP, array(
+											$new_cat_id = FlipperCode_Database::insert_or_update( TBL_GROUPMAP, array(
 												'group_map_title' => sanitize_text_field( $cat ),
 												'group_marker' => WPGMP_IMAGES.'default_marker.png',
 											) );
@@ -357,7 +357,7 @@ PRIMARY KEY  (location_id)
 								}
 							}
 							$datas['location_group_map'] = serialize( (array) $category_ids );
-							$result = WPGMP_Database::insert_or_update( $this->table, $datas );
+							$result = FlipperCode_Database::insert_or_update( $this->table, $datas );
 						}
 					}
 

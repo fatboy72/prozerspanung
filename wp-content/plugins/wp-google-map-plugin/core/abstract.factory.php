@@ -5,7 +5,7 @@
  * @package Core
  */
 
-if ( ! class_exists( 'AbstractFactoryWPGMP' ) ) {
+if ( ! class_exists( 'AbstractFactoryFlipperCode' ) ) {
 
 	/**
 	 * Factory Class Abstract
@@ -13,12 +13,14 @@ if ( ! class_exists( 'AbstractFactoryWPGMP' ) ) {
 	 * @version 3.0.0
 	 * @package Core
 	 */
-	abstract class AbstractFactgoryWPGMP {
+	abstract class AbstractFactoryFlipperCode {
 		/**
 		 * Abstrct create object
 		 * @param  string $object Object Type.
 		 * @return object         Return class object.
 		 */
+		private $modulePrefix;
+		private $modulePath;
 		abstract public function create_object($object);
 	}
 }

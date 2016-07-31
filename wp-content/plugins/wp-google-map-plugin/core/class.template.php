@@ -1,126 +1,152 @@
 <?php
 /**
  * Generate Bootstrap Form and it's Elements.
+ *
  * @author Flipper Code <hello@flippercode.com>
- * @version 3.0.0
- * @package Maps
+ * @package Core
  */
 
-if ( ! class_exists( 'Responsive_Markup' ) ) {
+if ( ! class_exists( 'FlipperCode_HTML_Markup' ) ) {
 
 	/**
 	 * Generate Bootstrap Form and it's Elements.
+	 *
 	 * @author Flipper Code <hello@flippercode.com>
-	 * @version 3.0.0
-	 * @package Maps
+	 * @package Core
 	 */
-	class Responsive_Markup {
+	class FlipperCode_HTML_Markup {
 		/**
 		 * Form Title
+		 *
 		 * @var String
 		 */
 		protected $form_title = null;
 		/**
 		 * Form Name
+		 *
 		 * @var String
 		 */
 		public $form_name = null;
 		/**
 		 * Form ID
+		 *
 		 * @var String
 		 */
 		public $form_id = null;
 		/**
 		 * Form Action
+		 *
 		 * @var String
 		 */
 		public $form_action = '';
 		/**
 		 * Form Orientation - Vertical or Horizontal
+		 *
 		 * @var String
 		 */
 		public $form_type = 'form-horizontal';
 		/**
 		 * Call to Action Slug
+		 *
 		 * @var String
 		 */
 		protected $manage_pagename = null;
 		/**
 		 * Call to Action Title
+		 *
 		 * @var String
 		 */
 		protected $manage_pagetitle = null;
 		/**
 		 * Success or Failure Form Response
+		 *
 		 * @var Array
 		 */
 		protected $form_response = null;
 		/**
 		 * Form Method - POST or GET
+		 *
 		 * @var string
 		 */
 		protected $form_method = 'post';
 		/**
 		 * Bootstrap Elements Supported
+		 *
 		 * @var Array
 		 */
-		private $form_elements = array( 'text','checkbox','radio','submit','button','select', 'hidden', 'wp_editor', 'html', 'datalist','textarea' , 'file' , 'div' , 'blockquote','html' , 'image','group','table', 'message', 'anchor', 'image_picker' );
+		private $form_elements = array( 'text','checkbox','multiple_checkbox','radio','submit','button','select', 'hidden', 'wp_editor', 'html', 'datalist','textarea' , 'file' , 'div' , 'blockquote','html' , 'image','group','table', 'message', 'anchor', 'image_picker', 'radio_slider', 'category_selector' );
 		/**
 		 * Attributes Allowed
+		 *
 		 * @var Array
 		 */
 		private $allowed_attributes;
 		/**
 		 * Hidden Fields
+		 *
 		 * @var Array
 		 */
 		private $form_hiddens = array();
 		/**
 		 * Form nonce key.
+		 *
 		 * @var string
 		 */
 		private $nonce_key = 'wpgmp-nonce';
 		/**
 		 * Array of Bootstrap Elements
+		 *
 		 * @var Array
 		 */
 		protected $elements = array();
 		/**
 		 * Array of Previously Stored Elements
+		 *
 		 * @var Array
 		 */
 		protected $backup_elements = array();
 		/**
 		 * Array of Rendered Elements
+		 *
 		 * @var Array
 		 */
 		protected $partially_rendered = false;
 		/**
 		 * Number of bootstrap columns
+		 *
 		 * @var Int
 		 */
 		/**
 		 * Whether setting api enabled or not.
+		 *
 		 * @var boolean
 		 */
 		public $setting_api = false;
 		/**
 		 * Columns in row.
+		 *
 		 * @var integer
 		 */
 		protected $columns = 1;
 		/**
+		 * Divide Page in multiple parts.
+		 *
+		 * @var string
+		 */
+		public $spliter = '';
+		/**
 		 * Intialize form properties.
 		 */
-		public function __construct( ) {
+		public function __construct() {
 
-			$this->allowed_attributes = array_fill_keys( array( 'lable', 'id', 'class', 'required', 'default_value', 'value', 'options', 'desc', 'before', 'after', 'radio-val-label', 'onclick', 'placeholder', 'textarea_rows', 'textarea_name', 'html', 'current', 'width', 'height', 'src', 'alt', 'heading', 'data', 'show' ) , '' );
+			$this->allowed_attributes = array_fill_keys( array( 'min', 'max', 'choose_button', 'remove_button', 'lable', 'id', 'class', 'required', 'default_value', 'value', 'options', 'desc', 'before', 'after', 'radio-val-label', 'onclick', 'placeholder', 'textarea_rows', 'textarea_name', 'html', 'current', 'width', 'height', 'src', 'alt', 'heading', 'data', 'show', 'optgroup', 'data_type' ) , '' );
 			$this->allowed_attributes['style'] = array();
 			$this->allowed_attributes['required'] = false;
 
 		}
 		/**
 		 * Set Form's header
+		 *
 		 * @param String $form_title       Form Title.
 		 * @param String $response         Success or Failure Message.
 		 * @param string $manage_pagetitle Call to Action Title.
@@ -137,27 +163,31 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 		/**
 		 * Form Method
+		 *
 		 * @param string $method Form Method.
 		 */
-		public function set_form_method($method) {
+		public function set_form_method( $method ) {
 			$this->form_method = $method;
 		}
 		/**
 		 * Title Setter
+		 *
 		 * @param string $title Form Title.
 		 */
-		public function set_title($title) {
+		public function set_title( $title ) {
 			$this->form_title = $title;
 		}
 		/**
 		 * Action Setter
+		 *
 		 * @param String $action Form Action.
 		 */
-		public function set_form_action($action) {
+		public function set_form_action( $action ) {
 			$this->form_action = $action;
 		}
 		/**
 		 * Title Getter
+		 *
 		 * @return String Get Form Title.
 		 */
 		public function get_title() {
@@ -168,10 +198,13 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		 * Call to Action Button
 		 */
 		public function get_manage_url() {
-			return "&nbsp&nbsp ( <a href='http://codecanyon.net/item/advanced-google-maps-plugin-for-wordpress/5211638'>Download Pro Version</a> )";
+
+			$ratingImg = plugin_dir_url( __DIR__ ).'/assets/images/rating.png';
+			return "<a class='product-rating wpgmp_pro_link' target='_blank' href='https://codecanyon.net/item/advanced-google-maps-plugin-for-wordpress/5211638'>Upgrade to Pro</a>";
 		}
 		/**
 		 * Get form success or error message.
+		 *
 		 * @return HTML Success or error message html.
 		 */
 		public function get_form_messages() {
@@ -182,34 +215,38 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			$output = '';
 			if ( $response['error'] ) {
 
-				$output .= '<div class="col-md-11 alert alert-danger fade in">';
-				$output .= ''.$response['error'].'</div>';
+				$output .= '<div class="col-md-11 alert alert-danger fade in">   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+';
+				$output .= '' . $response['error'] . '</div>';
 			} else {
 
-				$output .= '<div class="col-md-11 alert alert-success fade in">';
-				$output .= ''.$response['success'].'</div>';
+				$output .= '<div class="col-md-11 alert alert-success fade in">   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+';
+				$output .= '' . $response['success'] . '</div>';
 			}
 			return $output;
 		}
 		/**
 		 * Form header getter.
+		 *
 		 * @return HTML  Generate form header html.
 		 */
 		public function get_header() {
 
 			$output = '<div class="container">
-						<div class="row">
+						<div class="row flippercode-main">
 						<div class="col-md-12">
-						<h4 class="alert alert-info">'.$this->get_title().$this->get_manage_url().'</h4>
-						<div class="wpgmp-overview">'.
+						<h4 class="alert alert-info">' . $this->get_title() . $this->get_manage_url() . '</h4>
+						<div class="wpgmp-overview">' .
 						$this->get_form_messages();
 			return apply_filters( 'wpgmp_form_header_html', $output );
 		}
 		/**
 		 * Form footer getter.
+		 *
 		 * @return HTML Generate form footer html.
 		 */
-		public function get_footer( ) {
+		public function get_footer() {
 			$output = '</div>
 						</div>
 						</div>
@@ -219,9 +256,10 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Bootstrap columns setter.
+		 *
 		 * @param int $column Set columns occupied by element.
 		 */
-		public function set_col($column) {
+		public function set_col( $column ) {
 			if ( $this->elements ) {
 				$last_index = key( array_reverse( $this->elements ) );
 				$this->elements[ $last_index ]['col_after'] = $column;
@@ -237,6 +275,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Add element in queue.
+		 *
 		 * @param string $type Element type.
 		 * @param string $name Element name.
 		 * @param array  $args Element Properties.
@@ -251,10 +290,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Display bootstrap elements.
+		 *
 		 * @param  boolean $echo Echo or not.
 		 * @return HTML    Return form's element.
 		 */
-		public function print_elements($echo = true) {
+		public function print_elements( $echo = true ) {
 
 			if ( empty( $this->backup_elements ) ) {
 
@@ -273,6 +313,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Concat form elements together.
+		 *
 		 * @return html  Combined HTML of each elements.
 		 */
 		public function get_combined_markup() {
@@ -286,7 +327,8 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 				while ( $num < count( $elements ) ) {
 					$col = $this->get_col();
 					$elem_content = '';
-
+					//echo 'NO '.$num.' and col '.$col;
+					//echo '<pre>'; print_r($elements);	
 					foreach ( array_slice( $elements, $num, $col ) as $name => $atts ) {
 						$row_extra = false;
 						$temp = $before;
@@ -295,7 +337,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 						if ( 'hidden' == $atts['type'] ) {
 
-							$elem_content .= call_user_func( 'Responsive_Markup::field_'.$atts['type'], $name, $atts );
+							$elem_content .= call_user_func( 'FlipperCode_HTML_Markup::field_' . $atts['type'], $name, $atts );
 							continue;
 						}
 
@@ -312,7 +354,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 						$temp = str_replace( '{modifier}', '', $temp );
 					}
 					if ( ! empty( $elem_content ) ) {
-						$element_html .= $temp.$elem_content.$after; }
+						$element_html .= $temp . $elem_content . $after; }
 					$num = $num + $col;
 				}
 			}
@@ -321,29 +363,32 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Form header getter.
+		 *
 		 * @return html Generate form header html.
 		 */
 		public function get_form_header() {
 
-			$form_header = '<form enctype="multipart/form-data" method="'.$this->form_method.'" action="'.$this->form_action.'"';
+			$form_header = '<form enctype="multipart/form-data" method="' . $this->form_method . '" action="' . $this->form_action . '"';
 			if ( isset( $this->form_name ) && ! empty( $this->form_name ) ) {
-				$form_header .= ' name="'.$this->form_name.'" '; }
+				$form_header .= ' name="' . $this->form_name . '" '; }
 			if ( isset( $this->form_id ) && ! empty( $this->form_id ) ) {
-				$form_header .= ' id="'.$this->form_id.'" '; }
+				$form_header .= ' id="' . $this->form_id . '" '; }
 			$form_header .= '>';
-			$form_header .= '<div class="'.$this->form_type.'">';
+			$form_header .= '<div class="' . $this->form_type . '">';
 			return $form_header;
 
 		}
 		/**
 		 * Form nonce key setter.
+		 *
 		 * @param string $nonce_key Form nonce key.
 		 */
-		public function set_form_nonce($nonce_key) {
+		public function set_form_nonce( $nonce_key ) {
 			$this->nonce_key = $nonce_key;
 		}
 		/**
 		 * Form footer getter.
+		 *
 		 * @return html Generate form footer html.
 		 */
 		public function get_form_footer() {
@@ -355,10 +400,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Echo or return html elements.
+		 *
 		 * @param  boolean $echo  True to display.
 		 * @return html    html Generate form html
 		 */
-		public function render( $echo = true) {
+		public function render( $echo = true ) {
 
 			if ( ! $this->elements || ! is_array( $this->elements ) and $this->partially_rendered == false ) {
 				echo '<div id="message" class="error"><p>Please add form element first.</p></div>';
@@ -368,13 +414,16 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			$form_output = '';
 			if ( empty( $this->backup_elements ) ) {
 				$form_output = $this->get_header();
-				$form_output .= $this->get_form_header();
+				$form_header = $this->get_form_header();
 			}
 
-			$element_html = $this->get_combined_markup();
-			$form_output .= $element_html;
+			$form_html = $form_header . $this->get_combined_markup() . $this->get_form_footer();
+			if ( isset( $this->spliter ) and $this->spliter != '' ) {
+				$spliter = str_replace( '%form', $form_html, $this->spliter );
+			} else { 			$spliter = $form_html; }
 
-			$form_output .= $this->get_form_footer();
+			$form_output .= $spliter;
+
 			$form_output .= $this->get_footer();
 
 			if ( $echo ) {
@@ -383,6 +432,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Element's html creater.
+		 *
 		 * @param  string $name Element Name.
 		 * @param  string $type Element Type.
 		 * @param  array  $atts  Element Options.
@@ -393,15 +443,15 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			$element_output = '';
 			if ( 'hidden' == $type ) {
 
-				$element_output = call_user_func( 'Responsive_Markup::field_'.$type, $name, $atts );
+				$element_output = call_user_func( 'FlipperCode_HTML_Markup::field_' . $type, $name, $atts );
 				return $element_output;
 
 			} else {
 
 				if ( ! empty( $atts['lable'] ) ) {
-					$element_output .= apply_filters( 'wpgmp_input_label_'.$name, '<div class="col-md-3"><label for="'.$name.'">'.$atts['lable'].'</label>'.self::element_mandatory( @$atts['required'] ).'</div>' ); }
+					$element_output .= apply_filters( 'wpgmp_input_label_' . $name, '<div class="col-md-3"><label for="' . $name . '">' . $atts['lable'] . '</label>' . self::element_mandatory( @$atts['required'] ) . '</div>' ); }
 				$element_output .= @$atts['before'] ? @$atts['before'] : '<div class="col-md-8">';
-				$element_output .= call_user_func( 'Responsive_Markup::field_'.$type, $name, $atts );
+				$element_output .= call_user_func( 'FlipperCode_HTML_Markup::field_' . $type, $name, $atts );
 				$element_output .= @$atts['after'] ? @$atts['after'] : '</div>';
 				return $element_output;
 			}
@@ -409,6 +459,7 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Display mandatory indicator on element.
+		 *
 		 * @param  boolean $required Whether field is required or not.
 		 * @return html            Mandatory indicator.
 		 */
@@ -419,31 +470,32 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Attributes Generator for the element.
+		 *
 		 * @param  array $atts Attributes keys and values.
 		 * @return string      Attributes section of the element.
 		 */
-		protected static function get_element_attributes($atts) {
+		protected static function get_element_attributes( $atts ) {
 			if ( ! is_array( $atts ) ) {
 				return null; }
 
 			$attributes = array();
 			if ( isset( $atts['id'] ) && ! empty( $atts['id'] ) ) {
-				$attributes[0] = 'id="'.$atts['id'].'"'; }
+				$attributes[0] = 'id="' . $atts['id'] . '"'; }
 			$classes = ( ! empty( $atts['class'] )) ? $atts['class'] : 'form-control';
-			$attributes[1] = 'class="'.$classes.'"';
+			$attributes[1] = 'class="' . $classes . '"';
 			if ( isset( $atts['style'] ) && ! empty( $atts['style'] ) ) {
 				$attributes[2] = 'style="';
 				foreach ( $atts['style'] as $key => $value ) {
-					$attributes[2] .= $key.':'.$value.';'; }
+					$attributes[2] .= $key . ':' . $value . ';'; }
 				$attributes[2] .= '"';
 			}
 			if ( isset( $atts['placeholder'] ) && ! empty( $atts['placeholder'] ) ) {
-				$attributes[3] = 'placeholder="'.esc_attr( $atts['placeholder'] ).'"';
+				$attributes[3] = 'placeholder="' . esc_attr( $atts['placeholder'] ) . '"';
 			}
 
 			if ( isset( $atts['data'] ) && ! empty( $atts['data'] ) ) {
 				foreach ( $atts['data'] as $key => $value ) {
-					$attributes[3] = 'data-'.$key.'="'.esc_attr( $value ).'"'; }
+					$attributes[3] = 'data-' . $key . '="' . esc_attr( $value ) . '"'; }
 			}
 
 			if ( ! $attributes ) {
@@ -454,39 +506,39 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		}
 		/**
 		 * Image picker element.
+		 *
 		 * @param  string $name  No use.
 		 * @param  array  $atts  Attributes for custom html.
 		 * @return html       Image Picker.
 		 */
-		public static function field_image_picker($name, $atts) {
+		public static function field_image_picker( $name, $atts ) {
 
-			$html = Responsive_Markup::field_image('selected_image', array(
-				'lable' => 'Choose marker Image',
+			$html = FlipperCode_HTML_Markup::field_image('selected_image', array(
 				'src' => $atts['src'],
-				'width' => '32',
-				'class' => 'noclass selected_image col-md-1',
-				'height' => '37',
+				'width' => '100',
+				'class' => 'noclass selected_image',
+				'height' => '100',
 				'required' => $atts['required'],
 			));
 
-			$html .= Responsive_Markup::field_anchor('choose_image', array(
-				'value' => __( 'Choose Marker Image', WPGMP_TEXT_DOMAIN ),
+			$html .= FlipperCode_HTML_Markup::field_anchor('choose_image', array(
+				'value' => $atts['choose_button'],
 				'href' => 'javascript:void(0);',
-				'class' => 'btn btn-info choose_image col-md-3 ',
+				'class' => 'btn btn-info btn-xs choose_image col-md-3 ',
 				'data' => array( 'target' => $name ),
 			));
 
-			$html .= Responsive_Markup::field_anchor('remove_image', array(
-				'value' => __( 'Remove Marker Image', WPGMP_TEXT_DOMAIN ),
+			$html .= FlipperCode_HTML_Markup::field_anchor('remove_image', array(
+				'value' => $atts['remove_button'],
 				'before' => '<div class="col-md-3">',
 				'after' => '</div>',
 				'href' => 'javascript:void(0);',
-				'class' => 'btn btn-danger remove_image col-md-3 col-md-offset-1',
+				'class' => 'btn btn-danger btn-xs remove_image col-md-3 col-md-offset-1',
 				'data' => array( 'target' => $name ),
 
 			));
 
-			$html .= Responsive_Markup::field_hidden('group_marker', array(
+			$html .= FlipperCode_HTML_Markup::field_hidden('group_marker', array(
 				'value' => $atts['src'],
 				'id' => $name,
 				'name' => $name,
@@ -497,16 +549,34 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 		/**
 		 * Custom HTML to display.
+		 *
 		 * @param  string $name  No use.
 		 * @param  array  $atts  Attributes for custom html.
 		 * @return html       Body of custom html.
 		 */
-		public static function field_html($name, $atts) {
+		public static function field_html( $name, $atts ) {
 			extract( $atts );
 			return $html;
 		}
 		/**
+		 * Radio Slider
+		 *
+		 * @param  string $name Element name.
+		 * @param  array  $atts Attributes.
+		 * @return html       Element Html.
+		 */
+		public static function field_radio_slider( $name, $atts ) {
+			extract( $atts );
+			$value = $value ? $value : $default_value;
+			$min = $min ? $min : 1;
+			$max = $max ? $max : 100;
+
+			return '<div id="ui_' . $id . '" data-value="' . $value . '" data-min="' . $min . '" data-max="' . $max . '" class="ui-slider">
+			<input type="hidden" id="' . $id . '" value="' . $value . '" name="' . $name . '"></div>';
+		}
+		/**
 		 * Hidden Field
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -515,10 +585,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			extract( $atts );
 			$value = $value ? $value : $default_value;
-			return '<input type="hidden" name="'.$name.'" id="'.$id.'" value="'.$value.'" />';
+			return '<input type="hidden" name="' . $name . '" id="' . $id . '" value="' . $value . '" />';
 		}
 		/**
 		 * Group Heading
+		 *
 		 * @param  string $name Group title.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -527,10 +598,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			extract( $atts );
 			$value = $value ? $value : $default_value;
-			return '<h4 class="alert alert-info">'.$value.'</h4>';
+			return '<h4 class="alert alert-info">' . $value . '</h4>';
 		}
 		/**
 		 * DIV node
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -539,10 +611,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			extract( $atts );
 			$value = $value ? $value : $default_value;
-			return '<div name="'.$name.'" '.self::get_element_attributes( $atts ).'>'.$value.'</div>';
+			return '<div name="' . $name . '" ' . self::get_element_attributes( $atts ) . '>' . $value . '</div>';
 		}
 		/**
 		 * Blockquote node
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -551,11 +624,12 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			extract( $atts );
 			$value = $value ? $value : $default_value;
-			return '<blockquote>'.$atts['value'].'</blockquote>';
+			return '<blockquote>' . $atts['value'] . '</blockquote>';
 
 		}
 		/**
 		 * Text Input element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -565,37 +639,40 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			$elem_value = @$atts['value'] ? @$atts['value'] : $atts['default_value'];
 			if ( strstr( @$atts['class'], 'color' ) !== false ) {
 				$elem_value = str_replace( '#','',$elem_value );
-				$elem_value = '#'.$elem_value;
+				$elem_value = '#' . $elem_value;
 			}
-			$element  = '<input type="text" name="'.$name.'" value="'.esc_attr( stripcslashes( $elem_value ) ).'"'.self::get_element_attributes( $atts ).' />';
+			$element  = '<input type="text" name="' . $name . '" value="' . esc_attr( stripcslashes( $elem_value ) ) . '"' . self::get_element_attributes( $atts ) . ' />';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * Display Information message in <p> tag.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
 		 */
-		public static function field_infoarea($name, $atts) {
-			return '<p>'.$atts['desc'].'</p>'; }
+		public static function field_infoarea( $name, $atts ) {
+			return '<p>' . $atts['desc'] . '</p>'; }
 
 		/**
 		 * Image tag.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
 		 */
 		public static function field_image( $name, $atts ) {
 
-			$element  = '<img src="'.$atts['src'].'" alt="'.$atts['alt'].'" height="'.$atts['height'].'" width="'.$atts['width'].'" '.self::get_element_attributes( $atts ).' >';
+			$element  = '<img src="' . $atts['src'] . '" alt="' . $atts['alt'] . '" height="' . $atts['height'] . '" width="' . $atts['width'] . '" ' . self::get_element_attributes( $atts ) . ' >';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * Generate output using wp_editor.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -609,13 +686,14 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			wp_editor( esc_textarea( $value ) , $name, $args );
 			$output .= ob_get_contents();
 			ob_clean();
-			$output .= '<p class="help-block">'.$atts['desc'].'</p>';
+			$output .= '<p class="help-block">' . $atts['desc'] . '</p>';
 			return $output;
 
 		}
 
 		/**
 		 * Textarea element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -623,13 +701,14 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		public static function field_textarea( $name, $atts ) {
 
 			$elem_value = $atts['value'] ? $atts['value'] : $atts['default_value'];
-			$element  = '<textarea  rows="5" name="'.$name.'" '.self::get_element_attributes( $atts ).' >'.esc_textarea( wp_unslash( $elem_value ) ).'</textarea>';
+			$element  = '<textarea  rows="5" name="' . $name . '" ' . self::get_element_attributes( $atts ) . ' >' . esc_textarea( wp_unslash( $elem_value ) ) . '</textarea>';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * File Input element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -637,13 +716,14 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		public static function field_file( $name, $atts ) {
 
 			$elem_value = $atts['value'] ? $atts['value'] : $atts['default_value'];
-			$element  = '<input type="file" name="'.$name.'" '.self::get_element_attributes( $atts ).' />';
+			$element  = '<input type="file" name="' . $name . '" ' . self::get_element_attributes( $atts ) . ' />';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * Select Input element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -655,19 +735,30 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			$options = '';
 			$elem_value = $atts['current'] ? $atts['current'] : $atts['default_value'];
-
-			foreach ( $atts['options'] as $key => $value ) {
-				$options .= '<option value='.$key.' '.selected( $elem_value,$key,false ).'>'.$value.'</option>';
+			$optgroup = $atts['optgroup'] ? $atts['optgroup'] : 'false';
+			if ( 'true' == $optgroup ) {
+				foreach ( $atts['options'] as $opt_name => $values ) {
+					$options .= '<optgroup label="' . $opt_name . '">';
+					foreach ( $values as $key => $value ) {
+						$options .= '<option value="' . esc_attr( $key ) . '" ' . selected( $elem_value,$key,false ) . '>' . $value . '</option>';
+					}
+					$options .= '</optgroup>';
+				}
+			} else {
+				foreach ( $atts['options'] as $key => $value ) {
+					$options .= '<option value="' . esc_attr( $key ) . '" ' . selected( $elem_value,$key,false ) . '>' . $value . '</option>';
+				}
 			}
 
-			$element  = '<select name="'.$name.'" '.self::get_element_attributes( $atts ).'>'.$options.'</select>';
+			$element  = '<select name="' . $name . '" ' . self::get_element_attributes( $atts ) . '>' . $options . '</select>';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_select_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_select_field_' . $name, $element, $name, $atts );
 		}
 
 		/**
 		 * Submit button element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -676,14 +767,15 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			$element = '<div class="row">
 						<div class="col-md-12">
-						<input type="submit"  name="'.$name.'" class="btn btn-primary" value="'.$atts['value'].'"/>
+						<input type="submit"  name="' . $name . '" class="btn btn-primary" value="' . $atts['value'] . '"/>
 						</div>
 						</div>';
 
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * Button element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -693,16 +785,17 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			$eventstr = '';
 			if ( isset( $atts['onclick'] ) and ! empty( $atts['onclick'] ) ) {
 
-				$eventstr .= 'onclick ='.stripcslashes( $atts['onclick'] );
+				$eventstr .= 'onclick =' . stripcslashes( $atts['onclick'] );
 
 			}
-			$element  = '<button type="button"  name="'.$name.'" '.self::get_element_attributes( $atts ).' />'.$atts['value'].'</button>';
+			$element  = '<button type="button"  name="' . $name . '" ' . self::get_element_attributes( $atts ) . ' />' . $atts['value'] . '</button>';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 * Checkbox input element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -711,12 +804,35 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			$id = ( ! empty( $atts['id'] )) ? $atts['id'] : $name;
 			$value = $atts['value'] ? $atts['value'] : $atts['default_value'];
-			$element  = '<div class="checkbox"><label><input type="checkbox"  id="'.$atts['id'].'" name="'.$name.'" value="'.esc_attr( stripcslashes( $value ) ).'"'.self::get_element_attributes( $atts ).' '.checked( $value, $atts['current'], false ).'/>'.$atts['desc'].'</label></div> ';
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+			$element  = '<div class="checkbox"><label><input type="checkbox"  id="' . $atts['id'] . '" name="' . $name . '" value="' . esc_attr( stripcslashes( $value ) ) . '"' . self::get_element_attributes( $atts ) . ' ' . checked( $value, $atts['current'], false ) . '/>&nbsp;&nbsp;<span>' . $atts['desc'] . '</span></label></div> ';
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
+
+		}
+		/**
+		 * Multiple Checkbox input element.
+		 *
+		 * @param  string $name Element name.
+		 * @param  array  $atts Attributes.
+		 * @return html       Element Html.
+		 */
+		public static function field_multiple_checkbox( $name, $atts ) {
+
+			$id = ( ! empty( $atts['id'] )) ? $atts['id'] : $name;
+			$value = $atts['value'] ? $atts['value'] : $atts['default_value'];
+			$element = '';
+			if ( is_array( $value ) ) {
+				foreach ( $value as $key => $val ) {
+					if ( is_array( $atts['current'] ) and in_array( $key, $atts['current'] ) ) {
+						$element  .= '<div class="checkbox-inline"><input type="checkbox"  name="' . $name . '" value="' . esc_attr( stripcslashes( $key ) ) . '"' . self::get_element_attributes( $atts ) . ' checked="checked" />' . $val . '</div> ';
+					} else { 					$element  .= '<div class="checkbox-inline"><input type="checkbox"  name="' . $name . '" value="' . esc_attr( stripcslashes( $key ) ) . '"' . self::get_element_attributes( $atts ) . ' />&nbsp;&nbsp;<span>' . $val . '</span></div> '; }
+				}
+			}
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 
 		}
 		/**
 		 * Anchor tag element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -725,14 +841,15 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 
 			$id = ( ! empty( $atts['id'] )) ? $atts['id'] : $name;
 			$value = $atts['value'] ? $atts['value'] : $atts['default_value'];
-			$element  = '<a id="'.$atts['id'].'" name="'.$name.'" '.self::get_element_attributes( $atts ).'/>'.$value.'</a>';
+			$element  = '<a id="' . $atts['id'] . '" name="' . $name . '" ' . self::get_element_attributes( $atts ) . '/>' . $value . '</a>';
 			if ( isset( $atts['desc'] ) && ! empty( $atts['desc'] ) ) {
-				$element .= '<p class="help-block">'.$atts['desc'].'</p>'; }
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+				$element .= '<p class="help-block">' . $atts['desc'] . '</p>'; }
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 
 		}
 		/**
 		 * Radio input element.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -745,14 +862,15 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			if ( is_array( $atts['radio-val-label'] ) ) {
 
 				foreach ( $radio_options as $radio_val => $radio_label ) {
-					$element .= '<label class="radio-inline"><input type="radio" name="'.$name.'" value="'.esc_attr( stripcslashes( $radio_val ) ).'"'.self::get_element_attributes( $atts ).' '.checked( $radio_val, $elem_value, false ).'>&nbsp;&nbsp;'.$radio_label.'</label>';
+					$element .= '<label class="radio-inline"><input type="radio" name="' . $name . '" value="' . esc_attr( stripcslashes( $radio_val ) ) . '"' . self::get_element_attributes( $atts ) . ' ' . checked( $radio_val, $elem_value, false ) . '>&nbsp;&nbsp;' . $radio_label . '</label>';
 				}
 			}
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 
 		}
 		/**
 		 * Message boxes.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
@@ -760,29 +878,31 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 		public  static function field_message( $name, $atts ) {
 			$type = $atts['class'];
 			$id = $atts['id'];
-			$element = '<div '.self::get_element_attributes( $atts ).'>'.$atts['value'].'</div>';
-			return apply_filters( 'wpgmp_input_field_'.$name, $element, $name, $atts );
+			$element = '<div ' . self::get_element_attributes( $atts ) . '>' . $atts['value'] . '</div>';
+			return apply_filters( 'wpgmp_input_field_' . $name, $element, $name, $atts );
 		}
 		/**
 		 *  Sub heading
+		 *
 		 * @param  string $heading heading.
 		 * @return html   blockquote html wrapper.
 		 */
-		public static function sub_heading($heading) {
+		public static function sub_heading( $heading ) {
 
 			return '<div class="col-md-12">
 					<blockquote>
-					'.$heading.'
+					' . $heading . '
 					</blockquote>
 					</div>';
 		}
 		/**
 		 * Table generator.
+		 *
 		 * @param  string $name Element name.
 		 * @param  array  $atts Attributes.
 		 * @return html       Element Html.
 		 */
-		public static function field_table($name, $atts) {
+		public static function field_table( $name, $atts ) {
 			$heads = $atts['heading'];
 			$data  = $atts['data'];
 			$current = $atts['current'];
@@ -790,11 +910,11 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 			if ( ! isset( $atts['class'] ) or '' == $atts['class'] ) {
 				$atts['class'] = 'dataTable';
 			}
-			$output = '<table '.self::get_element_attributes( $atts ).' id="'.$id.'"><thead><tr>';
+			$output = '<table ' . self::get_element_attributes( $atts ) . ' id="' . $id . '"><thead><tr>';
 			if ( is_array( $heads ) ) {
 
 				foreach ( $heads as $head ) {
-					$output .= '<td><strong>'.__( $head, WPGMP_TEXT_DOMAIN ).'</strong></td>';
+					$output .= '<td><strong>' . $head . '</strong></td>';
 				}
 			}
 
@@ -803,42 +923,97 @@ if ( ! class_exists( 'Responsive_Markup' ) ) {
 				foreach ( $data as $row => $columns ) {
 					$output .= '<tr>';
 					foreach ( $columns as $key => $col ) {
-						$output .= '<td>'.($col).'</td>'; }
+						$output .= '<td>' . ($col) . '</td>'; }
 					$output .= '</tr>';
 				}
 			}
 
 			$output .= '</tbody></table>';
 
-			return apply_filters( 'wpgmp_input_field_'.$name, $output, $name, $atts );
+			return apply_filters( 'wpgmp_input_field_' . $name, $output, $name, $atts );
 
 		}
 		/**
 		 * Show success or error message.
+		 *
 		 * @param  array $response Success or Error message.
 		 * @return html          Success or error message wrapper.
 		 */
-		public static function show_message($response) {
+		public static function show_message( $response ) {
 
 			if ( empty( $response ) ) {
 				return; }
 
 			$output = '';
-			$output .= '<div id="message" class="'.$response['type'].'">';
-			$output .= '<p><strong>'.$response['message'].'</strong></p></div>';
+			$output .= '<div id="message" class="' . $response['type'] . '">';
+			$output .= '<p><strong>' . $response['message'] . '</strong></p></div>';
 
 			return $output;
 		}
 		/**
 		 * Button Wrapper
+		 *
 		 * @param  string $title Button title.
 		 * @param  url    $link  Link url.
 		 * @return html       Button wrapper.
 		 */
-		public static function button($title, $link) {
+		public static function button( $title, $link ) {
 
-			return '<span class="glyphicon glyphicon-add wpgmp_new_add button action"><a href="'.esc_html( $link ).'">'.__( $title,WPGMP_TEXT_DOMAIN ).'</a></span>';
+			return '<span class="glyphicon glyphicon-add wpgmp_new_add button action"><a href="' . esc_html( $link ) . '">' . $title . '</a></span>';
 		}
+		/**
+		 * Category Selection Generator.
+		 *
+		 * @param  string $name Element name.
+		 * @param  array  $atts Attributes.
+		 * @return html       Element Html.
+		 */
+		public static function field_category_selector( $name, $atts ) {
+			$data  = ( isset( $atts['data'] ) && ! empty( $atts['data'] ) ) ? $atts['data'] : array();
+			$placeholder = $atts['placeholder'];
+			$id = ( isset( $atts['id'] ) && ($atts['id'] != '') ) ? $atts['id'] : $name;
+			$class = $atts['class'];
+			$options = '';
 
+			if ( isset( $atts['data_type'] ) && ! empty( $atts['data_type'] ) && $atts['data_type'] != '' ) {
+				$data_type = explode( '=', $atts['data_type'] );
+				switch ( $data_type[0] ) {
+					case 'taxonomy':
+						$terms = get_terms( $data_type[1], array( 'hide_empty' => 0 ) );
+						foreach ( $terms as $term ) {
+							$selected = in_array( $term->term_id, $atts['current'] ) ? 'selected="selected"' : '';
+							$options .= "<option value='{$term->term_id}' {$selected}>{$term->name}</option>";
+						}
+						break;
+
+					case 'post_type':
+						$posts = get_posts( array( 'post_type' => $data_type[1] ) );
+						foreach ( $posts as $post ) {
+							$selected = in_array( $post->ID, $atts['current'] ) ? 'selected="selected"' : '';
+							$options .= "<option value='{$post->ID}' {$selected} >{$post->post_title}</option>";
+						}
+						break;
+
+					case 'users':
+						$users = isset( $data_type[1] ) ? get_users( array( 'role' => $data_type[1] ) ) : get_users( array() );
+						foreach ( $users as $user ) {
+							$selected = in_array( $user->data->ID, $atts['current'] ) ? 'selected="selected"' : '';
+							$options .= "<option value='{$user->data->ID}' {$selected} >{$user->data->user_login}</option>";
+						}
+						break;
+				}
+			} elseif ( ! empty( $data ) ) {
+				foreach ( $data as $row ) {
+					$options .= "<option value='{$row[id]}' {$row[selected]}>{$row[text]}</option>";
+				}
+			}
+
+			$output = '
+			<select id="' . $id . '" class="fc_select2 form-control ' . $class . '" name="' . $name . '[]" data-tags="true" data-placeholder="' . $placeholder . '" data-allow-clear="true" multiple="multiple">
+			  ' . $options . '
+			</select>
+			';
+			return $output;
+		}
 	}
 }

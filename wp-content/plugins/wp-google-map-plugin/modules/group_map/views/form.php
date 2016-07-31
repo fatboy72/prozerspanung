@@ -18,7 +18,7 @@ if ( isset( $_REQUEST['_wpnonce'] ) ) {
 	}
 }
 global $wpdb;
-$modelFactory = new FactoryModelWPGMP();
+$modelFactory = new WPGMP_Model();
 $category = $modelFactory->create_object( 'group_map' );
 $categories = (array) $category->fetch();
 if ( isset( $_GET['doaction'] ) and  'edit' == $_GET['doaction'] and isset( $_GET['group_map_id'] ) ) {
@@ -28,7 +28,7 @@ if ( isset( $_GET['doaction'] ) and  'edit' == $_GET['doaction'] and isset( $_GE
 	// Reset $_POST object for antoher entry.
 	unset( $_POST );
 }
-$form  = new Responsive_Markup();
+$form  = new FlipperCode_HTML_Markup();
 $form->set_header( __( 'Marker Category', WPGMP_TEXT_DOMAIN ), $response, __( 'Manage Marker Categories', WPGMP_TEXT_DOMAIN ), 'wpgmp_manage_group_map' );
 if ( is_array( $categories ) ) {
 	$markers = array( ' ' => 'Please Select' );
@@ -63,6 +63,8 @@ $form->add_element('image_picker', 'group_marker', array(
 	'lable' => __( 'Choose Marker Image', WPGMP_TEXT_DOMAIN ),
 	'src' => (isset( $_POST['group_marker'] ) ) ? wp_unslash( $_POST['group_marker'] ) : WPGMP_IMAGES.'/default_marker.png',
 	'required' => false,
+	'choose_button' => __( 'Choose', WPGMP_TEXT_DOMAIN ),
+	'remove_button' => __( 'Remove',WPGMP_TEXT_DOMAIN ),
 ));
 
 $form->add_element('submit', 'create_group_map_location', array(

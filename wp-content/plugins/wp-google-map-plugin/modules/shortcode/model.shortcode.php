@@ -13,7 +13,7 @@ if ( ! class_exists( 'WPGMP_Model_Shortcode' ) ) {
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
-	class WPGMP_Model_Shortcode extends WPGMP_Model_Base {
+	class WPGMP_Model_Shortcode extends FlipperCode_Model_Base {
 		/**
 		 * Intialize Shortcode object.
 		 */

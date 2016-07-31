@@ -6,15 +6,15 @@
  * @package Core
  */
 
-if ( ! class_exists( 'WPGMP_Core_Controller' ) ) {
+if ( ! class_exists( 'Flippercode_Core_Controller' ) ) {
 
 	/**
 	 * Controller class to display views.
-	 * @author: Flipper Code<hello@flippercode.com>
-	 * @version: 3.0.0
-	 * @package: Maps
+	 * @author Flipper Code<hello@flippercode.com>
+	 * @version 3.0.0
+	 * @package Core
 	 */
-	class WPGMP_Core_Controller {
+	class Flippercode_Core_Controller {
 
 		/**
 		 * Store object type
@@ -31,19 +31,33 @@ if ( ! class_exists( 'WPGMP_Core_Controller' ) ) {
 	     * @var Array
 	     */
 	    private $entityObjProperties;
-
-		/**
-		 * Intialize controller properties
-		 * @param String $objectType Pass type of the Object.
+	    /**
+		 * Store path to modules
+		 * @var String
 		 */
-	    function __construct($objectType) {
+		private $modulePath;
+		/**
+		 * Store current module prefix according to plugin for frontend prefix needs.
+		 * @var String
+		*/
+		private $modulePrefix;
+		/**
+		 * Store plugin's text domain.
+		 * @var String
+		*/
+		private $textDomain;
+
+	    function __construct($objectType,$module_path,$modulePrefix='') {
 
 			$this->entity = $objectType;
-			if ( file_exists( WPGMP_MODEL.$this->entity.'/model.'.$this->entity.'.php' ) ) {
-				$factoryObject = new FactoryModelWPGMP();
-				$this->entityObj = $factoryObject->create_object( $this->entity );
+			$this->modulePath = $module_path;
+
+            if ( file_exists( $this->modulePath.$this->entity.'/model.'.$this->entity.'.php' ) ) {
+				$factoryObject = new Flippercode_Factory_Model($module_path,$modulePrefix);
+				$this->entityObj = $factoryObject->create_object( $this->entity);
 				if ( is_object( $this->entityObj ) ) {
-					$this->entityObjProperties = get_object_vars( $this->entityObj ); }
+					$this->entityObjProperties = get_object_vars( $this->entityObj );
+			    }
 			}
 
 		}
@@ -61,7 +75,7 @@ if ( ! class_exists( 'WPGMP_Core_Controller' ) ) {
 			}
 
 			if ( ! empty( $view ) ) {
-				return include( WPGMP_MODEL. "{$this->entity}/views/".$view );
+				return include( $this->modulePath. "{$this->entity}/views/".$view );
 			}
 		}
 		/**
@@ -78,11 +92,13 @@ if ( ! class_exists( 'WPGMP_Core_Controller' ) ) {
 		protected function do_action( $action = '' ) {
 
 			global $wpdb;
-			$response = '';
+
 			try {
 				if ( isset( $_POST['operation'] ) and sanitize_text_field( wp_unslash( $_POST['operation'] ) ) != '' ) {
 					$operation = sanitize_text_field( wp_unslash( $_POST['operation'] ) );
-					$response = $this->entityObj->$operation();
+					if(method_exists($this->entityObj,$operation)){
+						$response = $this->entityObj->$operation();
+					}
 				}
 			} catch (Exception $e) {
 				$response['error'] = $e->getMessage();
@@ -136,11 +152,7 @@ if ( ! class_exists( 'WPGMP_Core_Controller' ) ) {
 	    	if ( $this->entityObj->save() > 0 ) {
 
 					$current_obj_name = ucfirst( $this->entity );
-				if ( isset( $_GET['doaction'] ) and 'edit' == $_GET['doaction'] ) {
-					$response['success']  = __( $current_obj_name.' updated successfully.',WPGMP_TEXT_DOMAIN );
-				} else { 					$response['success']  = __( $current_obj_name.' added successfully. You can manage your '.$current_obj_name.'s <a href="'.admin_url( 'admin.php?page=wpgmp_manage_'.$this->entity ).'">here</a>.', WPGMP_TEXT_DOMAIN ); }
-
-			   	$_POST = array();
+				   	$_POST = array();
 			}
 
 			return $response;

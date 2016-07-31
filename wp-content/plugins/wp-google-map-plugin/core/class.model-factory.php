@@ -5,7 +5,7 @@
  * @package Core
  */
 
-if ( ! class_exists( 'FactoryModelWPGMP' ) ) {
+if ( ! class_exists( 'Flippercode_Factory_Model' ) ) {
 
 	/**
 	 * Model Factory Class
@@ -13,12 +13,15 @@ if ( ! class_exists( 'FactoryModelWPGMP' ) ) {
 	 * @version 3.0.0
 	 * @package Core
 	 */
-	class FactoryModelWPGMP extends AbstractFactgoryWPGMP {
+	class Flippercode_Factory_Model extends AbstractFactoryFlipperCode{
 		/**
 		 * FactoryModel constructer.
 		 */
-		public function __construct() {
 
+		public function __construct($module_path, $module_prefix = '') {
+			
+		    $this->modulePrefix = $module_prefix;
+		    $this->modulePath = $module_path;
 		}
 		/**
 		 * Create model object by passing object type.
@@ -26,15 +29,14 @@ if ( ! class_exists( 'FactoryModelWPGMP' ) ) {
 		 * @return object         Return class object.
 		 */
 		public function create_object($objectType) {
-			switch ( $objectType ) {
-
-				default:
-					require_once( WPGMP_MODEL.$objectType.'/model.'.$objectType.'.php' );
-					$object = 'WPGMP_Model_'.$objectType;
-
-				return new $object();
-				break;
+		
+			$file = $this->modulePath.$objectType.'/model.'.$objectType.'.php';
+			if(file_exists($file)) {
+				require_once( $file );
+				$object = $this->modulePrefix.ucfirst($objectType);
+				return new $object();	
 			}
+			
 
 		}
 

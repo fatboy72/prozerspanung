@@ -14,7 +14,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 	 * @package Maps
 	 * @author Flipper Code <hello@flippercode.com>
 	 */
-	class WPGMP_Model_Map extends WPGMP_Model_Base {
+	class WPGMP_Model_Map extends FlipperCode_Model_Base {
 		/**
 		 * Validations on route properies.
 		 * @var array
@@ -108,7 +108,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 		 * Add or Edit Operation.
 		 */
 		function save() {
-
+			global $_POST;
 			$data = array();
 			$entityID = '';
 
@@ -162,7 +162,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 				$where = '';
 			}
 
-			$result = WPGMP_Database::insert_or_update( $this->table, $data, $where );
+			$result = FlipperCode_Database::insert_or_update( $this->table, $data, $where );
 			if ( false === $result ) {
 				$response['error'] = __( 'Something went wrong. Please try again.',WPGMP_TEXT_DOMAIN );
 			} elseif ( $entityID > 0 ) {
@@ -178,9 +178,9 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 		function delete() {
 			if ( isset( $_GET['map_id'] ) ) {
 				$id = intval( wp_unslash( $_GET['map_id'] ) );
-				$connection = WPGMP_Database::connect();
+				$connection = FlipperCode_Database::connect();
 				$this->query = $connection->prepare( "DELETE FROM $this->table WHERE $this->unique='%d'", $id );
-				return WPGMP_Database::non_query( $this->query, $connection );
+				return FlipperCode_Database::non_query( $this->query, $connection );
 			}
 		}
 		/**
@@ -199,7 +199,7 @@ if ( ! class_exists( 'WPGMP_Model_Map' ) ) {
 						} else { 					$data[$column] = $value; }
 				}
 
-				$result = WPGMP_Database::insert_or_update( $this->table, $data );
+				$result = FlipperCode_Database::insert_or_update( $this->table, $data );
 			}
 		}
 

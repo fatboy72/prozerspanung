@@ -7,7 +7,17 @@ body {
     font-size: 15px;
     line-height: 1.42857143;
     color: #2c3e50;
-    background-color: #ffffff;
+}
+
+.row.flippercode-main {
+    background: #ffffff !important;
+    width: 101%;
+    margin-top: 20px;
+}
+
+img.noclass.selected_image {
+    width: auto;
+    height: auto;
 }
 
 .wpgmp-overview .hiderow {
@@ -713,4 +723,129 @@ table.dataTable td {
     font-size: 0px;
     display: block;
     opacity: 1;
+    transition-duration: 0s;
+}
+
+.helpdask-bootom:hover {
+    background-position: 0 -101px;
+}
+
+.container {
+    width: 100%;
+}
+
+@media (max-width: 990px) {
+    .marker_img {
+        width: 65px;
+        height: auto;
+        clear: both;
+        margin-bottom: 20px;
+    }
+    .marker_img1 {
+        width: 40%;
+        height: auto;
+        clear: both;
+        margin-bottom: 20px;
+    }
+    .marker_img2 {
+        width: 40%;
+        height: auto;
+        clear: both;
+        margin: 0 0 20px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .marker_img {
+        width: 65px;
+        height: auto;
+        clear: both;
+        margin-bottom: 20px;
+    }
+    .marker_img1 {
+        width: 100%;
+        height: auto;
+        clear: both;
+        margin-bottom: 20px;
+    }
+    .marker_img2 {
+        width: 100%;
+        height: auto;
+        clear: both;
+        margin: 0 0 20px 0px;
+    }
+}
+
+@media (max-width: 788px) {
+    .radio input[type="radio"],
+    .radio-inline input[type="radio"],
+    .checkbox input[type="checkbox"],
+    .checkbox-inline input[type="checkbox"] {
+        margin-left: -23px;
+    }
+    input[type="radio"],
+    input[type="checkbox"] {
+        line-height: normal;
+        margin: -1px 0 0;
+    }
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="text"] {
+        margin-bottom: 6px;
+    }
+    .wpgmp_location_selection {
+        float: left;
+        width: 100%;
+    }
+}
+
+.helpdask-bootom {
+    position: fixed;
+    right: 30px;
+    bottom: 5px;
+    border-radius: 5px;
+    padding: 0px;
+    background: url(../images/helpdesk.png) no-repeat;
+    width: 150px;
+    height: 83px;
+    color: #fff;
+    font-size: 0px;
+    display: block;
+    opacity: 1;
+}
+
+.update-nag,
+.updated {
+    display: none;
+}
+
+.wpgmp-docs {
+    font-size: 1em !important;
+}
+
+.wpgmp-docs,
+.wpgmp-docs p,
+.wpgmp-docs ol li {
+    font-size: 1.2em !important;
+    line-height: 1.7em;
+}
+
+.wpgmp-docs a {
+    color: #3498db;
+}
+
+.wpgmp_pro_link {
+    float: right;
+    background: orange;
+    padding: 9px;
+    font-size: 15px;
+    margin-top: -8px;
+    margin-right: -9px;
+}
+
+.wpgmp_key_required a {
+    color: #dddddd;
+    text-decoration: underline;
 }

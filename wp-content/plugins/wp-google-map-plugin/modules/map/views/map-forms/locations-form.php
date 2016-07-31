@@ -5,7 +5,7 @@
  */
 
 global $wpdb;
-$modelFactory = new FactoryModelWPGMP();
+$modelFactory = new WPGMP_Model();
 $category = $modelFactory->create_object( 'group_map' );
 $location = $modelFactory->create_object( 'location' );
 $locations = $location->fetch();
